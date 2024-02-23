@@ -1,20 +1,51 @@
-import type { Config } from "tailwindcss";
+import { nextui } from '@nextui-org/react';
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+    content: [
+        './src/pages/**/*.{html,js,ts,jsx,tsx,mdx}',
+        './src/components/**/*.{html,js,ts,jsx,tsx,mdx}',
+        './src/app/**/*.{html,js,ts,jsx,tsx,mdx}',
+        './node_modules/@nextui-org/theme/dist/**/*.{html,js,ts,jsx,tsx}',
+    ],
+    theme: {
+        extend: {
+            backgroundImage: {
+                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                'gradient-conic':
+                    'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+            },
+            gridTemplateColumns: {
+                gallery: 'repeat(auto-fit, minmax(250px, 1fr))',
+            },
+        },
     },
-  },
-  plugins: [],
+    darkMode: 'class',
+    plugins: [
+        nextui({
+            layout: {
+                radius: {
+                    small: '2px',
+                    medium: '4px',
+                    large: '8px',
+                },
+                borderWidth: {
+                    small: '1px',
+                    medium: '2px',
+                    large: '4px',
+                },
+            },
+            themes: {
+                light: {
+                    layout: {},
+                    colors: {},
+                },
+                dark: {
+                    layout: {},
+                    colors: {},
+                },
+            },
+        }),
+    ],
 };
 export default config;
