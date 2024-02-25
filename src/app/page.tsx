@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
 export default function Home() {
     const searchParams: UnsplashSearchParams = {
-        searchType: UnsplashSearchTypes.SEARCH,
+        searchType: UnsplashSearchTypes.KEYWORD,
         keyword: 'cat',
     };
 

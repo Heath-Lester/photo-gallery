@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@nextui-org/button';
+import { Tooltip } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { FiSun } from 'react-icons/fi';
@@ -14,35 +15,26 @@ export default function ThemeToggleAlt() {
         setMounted(true);
     }, []);
 
-    const lightButton: JSX.Element = (
-        <Button
-            isIconOnly
-            radius='full'
-            size='md'
-            variant='light'
-            aria-label='light mode'
-            value='light'
-            onClick={(e) => setTheme(e.currentTarget.value)}
-        >
-            <FiSun />
-        </Button>
-    );
-
-    const darkButton: JSX.Element = (
-        <Button
-            isIconOnly
-            radius='full'
-            size='md'
-            variant='light'
-            aria-label='dark mode'
-            value='dark'
-            onClick={(e) => setTheme(e.currentTarget.value)}
-        >
-            <IoMoon />
-        </Button>
-    );
-
     if (mounted) {
-        return theme === 'light' ? darkButton : lightButton;
+        return (
+            <Tooltip
+                content={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+                delay={500}
+                placement='bottom'
+                className='text-tiny'
+            >
+                <Button
+                    isIconOnly
+                    radius='full'
+                    size='md'
+                    variant='light'
+                    aria-label={theme === 'dark' ? 'dark mode' : 'light mode'}
+                    value={theme === 'dark' ? 'light' : 'dark'}
+                    onClick={(e) => setTheme(e.currentTarget.value)}
+                >
+                    {theme === 'dark' ? <FiSun /> : <IoMoon />}
+                </Button>
+            </Tooltip>
+        );
     }
 }

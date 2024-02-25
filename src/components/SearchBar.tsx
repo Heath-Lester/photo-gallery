@@ -1,14 +1,21 @@
 'use client';
 
 import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip } from '@nextui-org/react';
+import {
+    Button,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownSection,
+    DropdownTrigger,
+    Input,
+    Tooltip,
+} from '@nextui-org/react';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 
 export default function SearchBar() {
     const [mounted, setMounted] = useState(false);
-
-    const [selectedKeys, setSelectedKeys] = useState(new Set([UnsplashSearchTypes.SEARCH]));
-
+    const [selectedKeys, setSelectedKeys] = useState(new Set([UnsplashSearchTypes.KEYWORD]));
     const [search, setSearch] = useState('');
 
     const selectedValue: string = useMemo(
@@ -18,7 +25,6 @@ export default function SearchBar() {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setSearch('');
     };
 
     useEffect(() => {
@@ -27,15 +33,15 @@ export default function SearchBar() {
 
     if (mounted) {
         return (
-            <div className='flex justify-center items-center md:justify-between'>
+            <div className='flex w-6/12 mr-2'>
                 <Dropdown size='sm'>
                     <DropdownTrigger>
-                        <Button size='sm' variant='flat' className='rounded-l-md'>
+                        <Button size='sm' variant='flat' className='px-4 rounded-l-md rounded-r-none'>
                             {selectedValue}
                         </Button>
                     </DropdownTrigger>
                     <DropdownMenu
-                        aria-label='Search Options'
+                        aria-label='Search options'
                         variant='solid'
                         disallowEmptySelection
                         selectionMode='single'
@@ -45,18 +51,22 @@ export default function SearchBar() {
                             setSearch('');
                         }}
                     >
-                        {Object.values(UnsplashSearchTypes).map((type: string) => {
-                            return <DropdownItem key={type}>{type}</DropdownItem>;
-                        })}
+                        <DropdownSection title='Select a search method'>
+                            {Object.values(UnsplashSearchTypes).map((type: string) => {
+                                return <DropdownItem key={type}>{type}</DropdownItem>;
+                            })}
+                        </DropdownSection>
                     </DropdownMenu>
                 </Dropdown>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='flex w-full'>
                     <input
                         type='text'
                         value={search}
+                        name='searchInput'
                         onChange={(event) => setSearch(event.currentTarget.value)}
-                        placeholder='press enter to search'
-                        className='p-1.5 w-[260px] text-small rounded-r-md'
+                        onKeyUp={(event) => (event.key === 'Enter' ? event.currentTarget.blur() : null)}
+                        placeholder='Press enter to search'
+                        className='text-tiny rounded-l-none rounded-r-md w-full px-2 min-w-32'
                     ></input>
                 </form>
             </div>

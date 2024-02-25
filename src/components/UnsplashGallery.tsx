@@ -10,7 +10,7 @@ export default async function UnsplashGallery({ searchParams }: { searchParams: 
     const response: void | ApiResponse<{
         results: Basic[];
         total: number;
-    }> = await UnsplashProvider.fetchBySearchParams({ searchType: UnsplashSearchTypes.SEARCH, keyword: 'cat' });
+    }> = await UnsplashProvider.fetchBySearchParams({ searchType: UnsplashSearchTypes.KEYWORD, keyword: 'cat' });
 
     if (!response || !response.response) {
         return <h2>Loading...</h2>;
@@ -18,7 +18,7 @@ export default async function UnsplashGallery({ searchParams }: { searchParams: 
         return <h2>No results</h2>;
     } else {
         return (
-            <section className='overflow-y-auto max-w-6xl mx-auto grid gap-1 px-2 my-1 grid-cols-gallery'>
+            <section className='overflow-y-auto max-w-6xl mx-auto grid gap-3 px-5 pt-4 grid-cols-gallery'>
                 {response.response.results.map((photo: Basic) => {
                     return <UnsplashCardSimple key={photo.id} photo={photo} />;
                 })}

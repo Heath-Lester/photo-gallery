@@ -1,5 +1,5 @@
 export enum UnsplashSearchTypes {
-    SEARCH = 'Search',
+    KEYWORD = 'Keyword',
     TOPIC = 'Topic',
     USER = 'User',
     LIST = 'List',
