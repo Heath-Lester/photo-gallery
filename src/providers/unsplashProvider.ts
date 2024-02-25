@@ -10,7 +10,7 @@ export class UnsplashProvider {
     private defaultPageNumber: number = 1;
     private defaultPageSize: number = 5;
     private unsplash = createApi({
-        accessKey: process.env.UNSPLASH_ACCESS_KEY as string,
+        accessKey: env.UNSPLASH_ACCESS_KEY as string,
         fetch: nodeFetch.default as unknown as typeof fetch,
     });
 
@@ -42,9 +42,7 @@ export class UnsplashProvider {
         });
     }
 
-    public async fetchPhotosByUser(
-        name: string,
-    ): Promise<void | ApiResponse<{ results: Basic[]; total: number }>> {
+    public async fetchPhotosByUser(name: string): Promise<void | ApiResponse<{ results: Basic[]; total: number }>> {
         return await this.unsplash.users
             .getPhotos({
                 username: name,
@@ -56,9 +54,7 @@ export class UnsplashProvider {
             });
     }
 
-    public async fetchPhotosByTopic(
-        topic: string,
-    ): Promise<void | ApiResponse<{ results: Basic[]; total: number }>> {
+    public async fetchPhotosByTopic(topic: string): Promise<void | ApiResponse<{ results: Basic[]; total: number }>> {
         return await this.unsplash.topics
             .getPhotos({
                 topicIdOrSlug: topic,

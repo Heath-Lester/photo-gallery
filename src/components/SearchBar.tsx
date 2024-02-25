@@ -1,21 +1,13 @@
 'use client';
 
 import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
-import {
-    Button,
-    Dropdown,
-    DropdownItem,
-    DropdownMenu,
-    DropdownTrigger,
-} from '@nextui-org/react';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 
 export default function SearchBar() {
     const [mounted, setMounted] = useState(false);
 
-    const [selectedKeys, setSelectedKeys] = useState(
-        new Set([UnsplashSearchTypes.SEARCH]),
-    );
+    const [selectedKeys, setSelectedKeys] = useState(new Set([UnsplashSearchTypes.SEARCH]));
 
     const [search, setSearch] = useState('');
 
@@ -40,11 +32,7 @@ export default function SearchBar() {
             <div className='flex justify-center items-center md:justify-between'>
                 <Dropdown size='sm'>
                     <DropdownTrigger>
-                        <Button
-                            size='sm'
-                            variant='bordered'
-                            className='capitalize'
-                        >
+                        <Button size='sm' variant='bordered' className='capitalize'>
                             {selectedValue}
                         </Button>
                     </DropdownTrigger>
@@ -59,24 +47,16 @@ export default function SearchBar() {
                             setSearch('');
                         }}
                     >
-                        {Object.values(UnsplashSearchTypes).map(
-                            (type: string) => {
-                                return (
-                                    <DropdownItem key={type}>
-                                        {type}
-                                    </DropdownItem>
-                                );
-                            },
-                        )}
+                        {Object.values(UnsplashSearchTypes).map((type: string) => {
+                            return <DropdownItem key={type}>{type}</DropdownItem>;
+                        })}
                     </DropdownMenu>
                 </Dropdown>
                 <form onSubmit={handleSubmit}>
                     <input
                         type='text'
                         value={search}
-                        onChange={(event) =>
-                            setSearch(event.currentTarget.value)
-                        }
+                        onChange={(event) => setSearch(event.currentTarget.value)}
                         placeholder='press enter to search'
                         className='p-1.5 w-[260px] text-small'
                     ></input>

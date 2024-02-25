@@ -5,11 +5,7 @@ import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
 import UnsplashCardSimple from './UnsplashCardSimple';
 
-export default async function UnsplashGallery({
-    searchParams,
-}: {
-    searchParams: UnsplashSearchParams;
-}) {
+export default async function UnsplashGallery({ searchParams }: { searchParams: UnsplashSearchParams }) {
     const unsplashProvider = new UnsplashProvider();
 
     const response: void | ApiResponse<{

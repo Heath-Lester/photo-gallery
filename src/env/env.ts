@@ -1,6 +1,6 @@
-import { cleanEnv, str } from 'envalid';
+import { CleanedEnvAccessors, cleanEnv, str } from 'envalid';
 
-const env = cleanEnv(process.env, {
+const env: Readonly<{ UNSPLASH_ACCESS_KEY: string } & CleanedEnvAccessors> = cleanEnv(process.env, {
     UNSPLASH_ACCESS_KEY: str(),
 });
 

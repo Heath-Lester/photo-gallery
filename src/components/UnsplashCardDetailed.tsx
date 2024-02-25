@@ -19,8 +19,7 @@ export default async function UnsplashCardDetailed() {
 
     const unsplashProvider = new UnsplashProvider();
 
-    const response: void | ApiResponse<Full> =
-        await unsplashProvider.fetchPhotoById(key);
+    const response: void | ApiResponse<Full> = await unsplashProvider.fetchPhotoById(key);
 
     if (!response || !response.response) {
         return <h2>Loading...</h2>;
