@@ -14,7 +14,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 1. Create a new file called `.env.local` at project directory level:
 
-    ![alt text](https://github.com/Heath-Lester/photo-gallery/blob/main/assets/images/env.local.png)
+    ![.env.local](https://github.com/Heath-Lester/photo-gallery/blob/main/assets/images/env.local.png)
 
 1. Create variable called `UNSPLASH_ACCESS_KEY`
 
