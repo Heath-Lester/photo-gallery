@@ -40,4 +40,4 @@ bun dev
 
 ### Open the application in your browser
 
-Got to `http://localhost:3000/`
+Got to [http://localhost:3000/](http://localhost:3000/)
