@@ -1,7 +1,7 @@
 'use client';
 
 import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip } from '@nextui-org/react';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 
 export default function SearchBar() {
@@ -25,14 +25,12 @@ export default function SearchBar() {
         setMounted(true);
     }, []);
 
-    if (!mounted) {
-        return null;
-    } else {
+    if (mounted) {
         return (
             <div className='flex justify-center items-center md:justify-between'>
                 <Dropdown size='sm'>
                     <DropdownTrigger>
-                        <Button size='sm' variant='bordered' className='capitalize'>
+                        <Button size='sm' variant='flat' className='rounded-l-md'>
                             {selectedValue}
                         </Button>
                     </DropdownTrigger>
@@ -58,7 +56,7 @@ export default function SearchBar() {
                         value={search}
                         onChange={(event) => setSearch(event.currentTarget.value)}
                         placeholder='press enter to search'
-                        className='p-1.5 w-[260px] text-small'
+                        className='p-1.5 w-[260px] text-small rounded-r-md'
                     ></input>
                 </form>
             </div>

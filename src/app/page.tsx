@@ -1,6 +1,7 @@
 import UnsplashGallery from '@/components/UnsplashGallery';
 import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
 import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
+import { Suspense } from 'react';
 
 export default function Home() {
     const searchParams: UnsplashSearchParams = {
@@ -8,5 +9,9 @@ export default function Home() {
         keyword: 'cat',
     };
 
-    return <UnsplashGallery searchParams={searchParams} />;
+    return (
+        <Suspense fallback={<span className='flex m-6 justify-center'>Loading...</span>}>
+            <UnsplashGallery searchParams={searchParams} />
+        </Suspense>
+    );
 }

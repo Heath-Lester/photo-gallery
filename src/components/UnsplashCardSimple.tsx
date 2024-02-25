@@ -13,6 +13,8 @@ export default function UnsplashCardSimple({ photo }: { photo: Basic }) {
                     <Image
                         alt={photo.alt_description ?? 'description'}
                         src={photo.urls.full}
+                        placeholder='blur'
+                        blurDataURL={photo.blur_hash ?? undefined}
                         fill={true}
                         loading='lazy'
                         decoding='async'

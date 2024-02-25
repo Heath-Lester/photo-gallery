@@ -3,8 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
 import MainHeader from '@/components/MainHeader';
-import Modal from '@/components/Modal';
-import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,9 +18,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Providers>
                     <MainHeader />
                     <main>{children}</main>
-                    {/* <Suspense fallback={<>Loading...</>}>
-                        <Modal />
-                    </Suspense> */}
                 </Providers>
             </body>
         </html>

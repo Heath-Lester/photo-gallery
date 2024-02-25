@@ -12,7 +12,7 @@ export default function ThemeToggleAlt() {
 
     useEffect(() => {
         setMounted(true);
-    }, [theme]);
+    }, []);
 
     const lightButton: JSX.Element = (
         <Button
@@ -42,9 +42,7 @@ export default function ThemeToggleAlt() {
         </Button>
     );
 
-    if (!mounted) {
-        return null;
-    } else {
+    if (mounted) {
         return theme === 'light' ? darkButton : lightButton;
     }
 }

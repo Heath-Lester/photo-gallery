@@ -4,14 +4,13 @@ import { ApiResponse } from 'unsplash-js/dist/helpers/response';
 import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
 import UnsplashCardSimple from './UnsplashCardSimple';
+import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
 
 export default async function UnsplashGallery({ searchParams }: { searchParams: UnsplashSearchParams }) {
-    const unsplashProvider = new UnsplashProvider();
-
     const response: void | ApiResponse<{
         results: Basic[];
         total: number;
-    }> = await unsplashProvider.fetchPhotosBySearch('cat');
+    }> = await UnsplashProvider.fetchBySearchParams({ searchType: UnsplashSearchTypes.SEARCH, keyword: 'cat' });
 
     if (!response || !response.response) {
         return <h2>Loading...</h2>;
