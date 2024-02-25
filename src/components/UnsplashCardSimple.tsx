@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import { Card, Link } from '@nextui-org/react';
+import React from 'react';
 
-export default function UnsplashCardSimple({ photo }: { photo: Basic }) {
+export default function UnsplashCardSimple({ photo }: { photo: Basic }): React.ReactNode {
     return (
         <Card className='cursor-pointer rounded-2xl min-h-72 max-h-96'>
             <Link

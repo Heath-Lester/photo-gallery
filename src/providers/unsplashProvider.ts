@@ -20,13 +20,13 @@ export class UnsplashProvider {
     ): Promise<void | ApiResponse<{ results: Basic[]; total: number }>> {
         switch (searchParams.searchType) {
             case UnsplashSearchTypes.KEYWORD: {
-                return this.fetchPhotosBySearch(searchParams.keyword);
+                return this.fetchPhotosBySearch(searchParams.input);
             }
             case UnsplashSearchTypes.TOPIC: {
-                return this.fetchPhotosByTopic(searchParams.keyword);
+                return this.fetchPhotosByTopic(searchParams.input);
             }
             case UnsplashSearchTypes.USER: {
-                return this.fetchPhotosByUser(searchParams.keyword);
+                return this.fetchPhotosByUser(searchParams.input);
             }
             case UnsplashSearchTypes.LIST: {
                 return this.fetchPhotos();

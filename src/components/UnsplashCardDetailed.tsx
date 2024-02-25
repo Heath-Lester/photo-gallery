@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { ApiResponse } from 'unsplash-js/dist/helpers/response';
 import { Full } from 'unsplash-js/dist/methods/photos/types';
 
-export default async function UnsplashCardDetailed() {
+export default async function UnsplashCardDetailed(): Promise<React.ReactElement | null> {
     const searchParams = useSearchParams();
     if (!searchParams) return null;
     const key: string | null = searchParams.get('photo');

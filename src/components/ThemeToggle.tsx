@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { FiSun } from 'react-icons/fi';
 import { IoMoon } from 'react-icons/io5';
 
-export default function ThemeToggleAlt() {
+export default function ThemeToggleAlt(): React.ReactNode | undefined {
     const [mounted, setMounted] = useState<boolean>(false);
     const { theme, setTheme } = useTheme();
 
