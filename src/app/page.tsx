@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 export default function Home(): React.ReactNode {
     const searchParams: UnsplashSearchParams = {
         searchType: UnsplashSearchTypes.KEYWORD,
-        input: '',
+        term: '',
     };
 
     return (

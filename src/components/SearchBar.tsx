@@ -16,10 +16,8 @@ import { FormEvent, useEffect, useMemo, useState } from 'react';
 export default function SearchBar(): React.ReactNode | undefined {
     const [mounted, setMounted] = useState(false);
     const [searchTypes, setSearchTypes] = useState<Set<UnsplashSearchTypes>>(new Set([UnsplashSearchTypes.KEYWORD]));
-    const [input, setInput] = useState('');
+    const [term, setTerm] = useState('');
     const router = useRouter();
-
-    const formName: string = 'searchForm';
 
     const selectedSearchType: string = useMemo(
         () => Array.from(searchTypes).join(', ').replaceAll('_', ' '),
@@ -31,7 +29,8 @@ export default function SearchBar(): React.ReactNode | undefined {
         if (!selectedSearchType) {
             throw Error(`The current search method is ${selectedSearchType}`);
         }
-        const newRoute: string = `/${selectedSearchType.toLowerCase()}/${input}`;
+        event.currentTarget.blur();
+        const newRoute: string = `/${selectedSearchType.toLowerCase()}/${term}`;
         router.push(newRoute);
     };
 
@@ -63,7 +62,7 @@ export default function SearchBar(): React.ReactNode | undefined {
                             selectedKeys={selectedSearchType}
                             onSelectionChange={(keys: Selection) => {
                                 setSearchTypes(keys as Set<UnsplashSearchTypes>);
-                                setInput('');
+                                setTerm('');
                                 return;
                             }}
                         >
@@ -77,8 +76,9 @@ export default function SearchBar(): React.ReactNode | undefined {
                     <input
                         type='text'
                         autoFocus
-                        value={input}
-                        onChange={(event) => setInput(event.currentTarget.value)}
+                        value={term}
+                        onChange={(event) => setTerm(event.currentTarget.value)}
+                        onKeyUp={(event) => (event.key === 'Enter' ? event.currentTarget.blur() : null)}
                         placeholder='Press enter to search'
                         className='text-tiny rounded-l-none rounded-r-md w-full px-2 min-w-32'
                     ></input>

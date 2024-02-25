@@ -11,7 +11,7 @@ export default async function UnsplashGallery({
 }: {
     searchParams: UnsplashSearchParams;
 }): Promise<React.ReactElement> {
-    if (!searchParams.input || searchParams.input.length === 0) {
+    if (!searchParams.term || searchParams.term.length === 0) {
         console.warn('Provided keyword is falsy or empty');
         return <GalleryPlaceholder displayText='Search something' />;
     }
