@@ -4,10 +4,10 @@ import { Card, Link } from '@nextui-org/react';
 
 export default function UnsplashCardSimple({ photo }: { photo: Basic }) {
     return (
-        <Card className='cursor-pointer rounded-2xl'>
+        <Card className='cursor-pointer rounded-2xl min-h-72 max-h-96'>
             <Link
                 href={`?modal=true&photo=` + photo.id}
-                className='relative text-inherit min-h-72 justify-center content-center group'
+                className='h-full relative text-inherit justify-center content-center group'
             >
                 <Image
                     alt={photo.alt_description ?? 'description'}

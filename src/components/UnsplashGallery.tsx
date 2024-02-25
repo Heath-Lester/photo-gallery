@@ -18,7 +18,7 @@ export default async function UnsplashGallery({ searchParams }: { searchParams: 
         return <h2>No results</h2>;
     } else {
         return (
-            <section className='overflow-y-auto max-w-6xl mx-auto grid gap-3 px-5 pt-4 grid-cols-gallery'>
+            <section className='overflow-y-auto justify-center max-w-6xl mx-auto grid gap-4 px-5 pt-4 grid-cols-gallery'>
                 {response.response.results.map((photo: Basic) => {
                     return <UnsplashCardSimple key={photo.id} photo={photo} />;
                 })}
