@@ -18,7 +18,7 @@ export default function UnsplashCardSimple({ photo }: { photo: Basic }) {
                     loading='lazy'
                     decoding='async'
                     data-nimg='fill'
-                    className='object-cover group-hover:opacity-50 duration-700'
+                    className='object-cover overflow-hidden group-hover:opacity-50 duration-700'
                     sizes='
                             (max-width: 1280px) 278px,
                             (min-width: 1040px) calc(12.73vw + 118px),

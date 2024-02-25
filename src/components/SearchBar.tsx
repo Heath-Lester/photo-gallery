@@ -33,7 +33,7 @@ export default function SearchBar() {
 
     if (mounted) {
         return (
-            <div className='flex w-6/12 mr-2'>
+            <search className='flex flex-row max-w-screen-sm w-full items-center'>
                 <Dropdown size='sm'>
                     <DropdownTrigger>
                         <Button size='sm' variant='flat' className='px-4 rounded-l-md rounded-r-none'>
@@ -58,7 +58,7 @@ export default function SearchBar() {
                         </DropdownSection>
                     </DropdownMenu>
                 </Dropdown>
-                <form onSubmit={handleSubmit} className='flex w-full'>
+                <form onSubmit={handleSubmit} className='flex w-full h-8'>
                     <input
                         type='text'
                         value={search}
@@ -69,7 +69,7 @@ export default function SearchBar() {
                         className='text-tiny rounded-l-none rounded-r-md w-full px-2 min-w-32'
                     ></input>
                 </form>
-            </div>
+            </search>
         );
     }
 }
