@@ -13,7 +13,7 @@ export default async function UnsplashGallery({
 }): Promise<React.ReactElement> {
     if (!searchParams.term || searchParams.term.length === 0) {
         console.warn('Provided keyword is falsy or empty');
-        return <GalleryPlaceholder displayText='Search something' />;
+        return <GalleryPlaceholder displayText='Search for something.' />;
     }
 
     const response: void | ApiResponse<{
@@ -27,10 +27,10 @@ export default async function UnsplashGallery({
         return <GalleryPlaceholder displayText='No results' />;
     } else {
         return (
-            <section className='overflow-y-auto justify-center w-full grid gap-4 px-5 pt-4 grid-cols-gallery'>
-                {response.response.results.map((photo: Basic) => {
-                    return <UnsplashCardSimple key={photo.id} photo={photo} />;
-                })}
+            <section className='justify-center w-full grid mx-auto px-4 pt-5 grid-cols-gallery auto-rows-[10px]'>
+                {response.response.results.map((photo: Basic) => (
+                    <UnsplashCardSimple key={photo.id} photo={photo} />
+                ))}
             </section>
         );
     }

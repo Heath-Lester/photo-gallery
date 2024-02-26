@@ -9,7 +9,7 @@ import { addBlurHashToUnsplashImage, addBlurHashToUnsplashImages } from '@/utils
 
 export class UnsplashProvider {
     private static readonly defaultPageNumber: number = 1;
-    private static readonly defaultPageSize: number = 5;
+    private static readonly defaultPageSize: number = 10;
     private static readonly unsplash = createApi({
         accessKey: env.UNSPLASH_ACCESS_KEY,
         fetch: nodeFetch.default as unknown as typeof fetch,

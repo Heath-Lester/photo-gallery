@@ -6,7 +6,7 @@ import ThemeToggle from './ThemeToggle';
 
 export default function NavBar(): React.ReactNode {
     return (
-        <header className={`sticky pt-3 pb-3 px-5 top-0 z-10 shadow-lg bg-background border-solid border-b-small`}>
+        <header className={`sticky pt-3 pb-3 px-5 top-0 z-20 shadow-lg bg-background border-solid border-b-small`}>
             <nav className='flex flex-col items-center gap-1 sm:flex-row'>
                 <h1 className='text-2xl whitespace-nowrap sm:mr-4'>
                     <Link href='/'>Photo Gallery</Link>
