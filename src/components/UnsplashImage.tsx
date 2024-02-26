@@ -19,7 +19,7 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
         const cardWidth: number = Math.ceil(500 * heightWidthRatio);
 
         return (
-            <Card className='flex flex-row h-full w-full relative overflow-hidden gap-3 px-4 py-3'>
+            <Card className='flex flex-row md:flex-col-reverse sm:flex-col-reverse h-full w-full relative overflow-hidden gap-3 px-4 py-3'>
                 <img
                     alt={image.alt_description ?? 'description'}
                     src={image.urls.full}
@@ -30,7 +30,7 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                     <img
                         alt='Profile Image'
                         src={image.user.profile_image.large}
-                        className='rounded-full h-36 w-36 my-2 shadow-inner content-center self-center min-w-min'
+                        className='rounded-full max-h-36 max-w-36 my-2 shadow-inner content-center self-center min-w-m'
                     />
                     {image.user.name ? (
                         <div className='mb-3'>
