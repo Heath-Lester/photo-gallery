@@ -31,13 +31,28 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                         <img
                             alt='Profile Image'
                             src={image.user.profile_image.large}
-                            className='rounded-full h-32 w-32 my-2 shadow-inner content-center mx-auto'
+                            className='rounded-full h-36 w-36 my-2 shadow-inner content-center mx-auto'
                         />
-                        <p>{image.user.name}</p>
-                        <p>Instagram: {image.user.instagram_username}</p>
-                        <p>Location: {image.user.location}</p>
-                        <p>{image.user.bio}</p>
-                        <p>{image.description}</p>
+                        {image.user.name ? <p>{image.user.name}</p> : null}
+                        {image.user.instagram_username ? <p>@{image.user.instagram_username}</p> : null}
+                        {image.user.location ? (
+                            <>
+                                <p>Location:</p>
+                                <p className='pl-2'>{image.user.location}</p>
+                            </>
+                        ) : null}
+                        {image.user.bio ? (
+                            <>
+                                <p className='opacity-40'>Bio</p>
+                                <p className='pl-2'>{image.user.bio}</p>
+                            </>
+                        ) : null}
+                        {image.description ? (
+                            <>
+                                <p className='opacity-40'>Description</p>
+                                <p className='pl-2'>{image.description}</p>
+                            </>
+                        ) : null}
                     </Card>
                 </section>
             </Card>
