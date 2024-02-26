@@ -2,12 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-.fade-in-text {
+.fade-in-slow {
     animation: fadeIn 6s;
     -webkit-animation: fadeIn 6s;
     -moz-animation: fadeIn 6s;
     -o-animation: fadeIn 6s;
     -ms-animation: fadeIn 6s;
+}
+
+.fade-in-moderate {
+    animation: fadeIn 4s;
+    -webkit-animation: fadeIn 4s;
+    -moz-animation: fadeIn 4s;
+    -o-animation: fadeIn 4s;
+    -ms-animation: fadeIn 4s;
+}
+
+.fade-in-fast {
+    animation: fadeIn 2s;
+    -webkit-animation: fadeIn 2s;
+    -moz-animation: fadeIn 2s;
+    -o-animation: fadeIn 2s;
+    -ms-animation: fadeIn 2s;
+}
+
+.fade-in-immediate {
+    animation: fadeIn 1s;
+    -webkit-animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s;
+    -o-animation: fadeIn 1s;
+    -ms-animation: fadeIn 1s;
 }
 
 @keyframes fadeIn {

@@ -39,9 +39,11 @@ export default function SearchBar(): React.ReactNode | undefined {
         setSearchTypes(new Set([UnsplashSearchTypes.KEYWORD]));
     }, []);
 
-    if (mounted) {
+    if (!mounted) {
+        return <div className='flex w-full'></div>;
+    } else {
         return (
-            <search className='flex flex-row max-w-screen-sm w-full items-center'>
+            <search className='flex flex-row max-w-screen-sm w-full items-center fade-in-fast'>
                 <form onSubmit={handleSubmit} className='flex w-full h-8'>
                     <Dropdown size='sm'>
                         <DropdownTrigger>

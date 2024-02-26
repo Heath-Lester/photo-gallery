@@ -31,6 +31,7 @@ export default function ThemeToggleAlt(): React.ReactNode | undefined {
                     aria-label={theme === 'dark' ? 'dark mode' : 'light mode'}
                     value={theme === 'dark' ? 'light' : 'dark'}
                     onClick={(e) => setTheme(e.currentTarget.value)}
+                    className='fade-in-moderate'
                 >
                     {theme === 'dark' ? <FiSun /> : <IoMoon />}
                 </Button>
