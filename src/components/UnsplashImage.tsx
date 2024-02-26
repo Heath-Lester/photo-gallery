@@ -33,25 +33,35 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                             src={image.user.profile_image.large}
                             className='rounded-full h-36 w-36 my-2 shadow-inner content-center mx-auto'
                         />
-                        {image.user.name ? <p>{image.user.name}</p> : null}
-                        {image.user.instagram_username ? <p>@{image.user.instagram_username}</p> : null}
+                        {image.user.name ? (
+                            <div className='mb-3'>
+                                <p className='opacity-50'>Name</p>
+                                <p className='pl-3'>{image.user.name}</p>
+                            </div>
+                        ) : null}
+                        {image.user.instagram_username ? (
+                            <div className='mb-3'>
+                                <p className='opacity-50'>Instagram</p>
+                                <p className='pl-3'>{image.user.instagram_username}</p>
+                            </div>
+                        ) : null}
                         {image.user.location ? (
-                            <>
-                                <p>Location:</p>
-                                <p className='pl-2'>{image.user.location}</p>
-                            </>
+                            <div className='mb-3'>
+                                <p className='opacity-50'>Location:</p>
+                                <p className='pl-3'>{image.user.location}</p>
+                            </div>
                         ) : null}
                         {image.user.bio ? (
-                            <>
-                                <p className='opacity-40'>Bio</p>
-                                <p className='pl-2'>{image.user.bio}</p>
-                            </>
+                            <div className='mb-3'>
+                                <p className='opacity-50'>Bio</p>
+                                <p className='pl-3'>{image.user.bio}</p>
+                            </div>
                         ) : null}
                         {image.description ? (
-                            <>
-                                <p className='opacity-40'>Description</p>
-                                <p className='pl-2'>{image.description}</p>
-                            </>
+                            <div className='mb-3'>
+                                <p className='opacity-50'>Description</p>
+                                <p className='pl-3'>{image.description}</p>
+                            </div>
                         ) : null}
                     </Card>
                 </section>
