@@ -6,6 +6,7 @@ import React from 'react';
 export default function UnsplashCard({ photo }: { photo: Basic }): React.ReactNode {
     const widthHeightRatio: number = photo.height / photo.width;
     const cardHeight: number = Math.ceil(250 * widthHeightRatio);
+
     // divide card height by the auto rows pixels set in the gallery
     const rowSpan: number = Math.ceil(cardHeight / 10) + 1;
 
@@ -17,7 +18,7 @@ export default function UnsplashCard({ photo }: { photo: Basic }): React.ReactNo
             style={{ gridRow: `span ${rowSpan}` }}
         >
             <Link
-                href={`/modal/` + photo.id}
+                href={`?photo=` + photo.id}
                 className='grid-place-content-center justify-center cursor-pointer text-inherit overflow-hidden group'
             >
                 <Image

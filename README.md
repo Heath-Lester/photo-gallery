@@ -2,6 +2,11 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+Required Dependencies:
+
+-   Node v18.17.0
+-   NPM 10.4.0
+
 ## How to run locally
 
 ### Register with Unsplash to get API credentials
