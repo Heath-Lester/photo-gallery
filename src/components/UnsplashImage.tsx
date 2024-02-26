@@ -26,44 +26,42 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                     className='object-cover h-[85vh] max-w-[85vh] rounded-md shadow-inner'
                     sizes='500px'
                 />
-                <section>
-                    <Card className='flex flex-col mx-2 text-small font-semibold gap-3 p-4 shadow-md'>
-                        <img
-                            alt='Profile Image'
-                            src={image.user.profile_image.large}
-                            className='rounded-full h-36 w-36 my-2 shadow-inner content-center mx-auto'
-                        />
-                        {image.user.name ? (
-                            <div className='mb-3'>
-                                <p className='opacity-50'>Name</p>
-                                <p className='pl-3'>{image.user.name}</p>
-                            </div>
-                        ) : null}
-                        {image.user.instagram_username ? (
-                            <div className='mb-3'>
-                                <p className='opacity-50'>Instagram</p>
-                                <p className='pl-3'>{image.user.instagram_username}</p>
-                            </div>
-                        ) : null}
-                        {image.user.location ? (
-                            <div className='mb-3'>
-                                <p className='opacity-50'>Location:</p>
-                                <p className='pl-3'>{image.user.location}</p>
-                            </div>
-                        ) : null}
-                        {image.user.bio ? (
-                            <div className='mb-3'>
-                                <p className='opacity-50'>Bio</p>
-                                <p className='pl-3'>{image.user.bio}</p>
-                            </div>
-                        ) : null}
-                        {image.description ? (
-                            <div className='mb-3'>
-                                <p className='opacity-50'>Description</p>
-                                <p className='pl-3'>{image.description}</p>
-                            </div>
-                        ) : null}
-                    </Card>
+                <section className='flex flex-col mx-2 text-small font-semibold gap-3 p-4 min-w-min max-w-[15vw] shadow-md rounded-md'>
+                    <img
+                        alt='Profile Image'
+                        src={image.user.profile_image.large}
+                        className='rounded-full h-36 w-36 my-2 shadow-inner content-center self-center min-w-min'
+                    />
+                    {image.user.name ? (
+                        <div className='mb-3'>
+                            <p className='opacity-50'>Name</p>
+                            <p className='pl-3'>{image.user.name}</p>
+                        </div>
+                    ) : null}
+                    {image.user.instagram_username ? (
+                        <div className='mb-3'>
+                            <p className='opacity-50'>Instagram</p>
+                            <p className='pl-3'>{image.user.instagram_username}</p>
+                        </div>
+                    ) : null}
+                    {image.user.location ? (
+                        <div className='mb-3'>
+                            <p className='opacity-50'>Location</p>
+                            <p className='pl-3'>{image.user.location}</p>
+                        </div>
+                    ) : null}
+                    {image.user.bio ? (
+                        <div className='mb-3'>
+                            <p className='opacity-50'>Bio</p>
+                            <p className='pl-3'>{image.user.bio}</p>
+                        </div>
+                    ) : null}
+                    {image.description ? (
+                        <div className='mb-3'>
+                            <p className='opacity-50'>Description</p>
+                            <p className='pl-3 max-w-fit'>{image.description}</p>
+                        </div>
+                    ) : null}
                 </section>
             </Card>
         );
