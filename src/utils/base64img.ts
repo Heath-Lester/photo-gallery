@@ -50,7 +50,7 @@ export async function addBlurHashToUnsplashImages(
 }
 
 /**
- * Add blur hash ot image using Plaiceholder
+ * Add blur hash to image using Plaiceholder
  * {@link https://plaiceholder.co/docs}
  * @param unsplashResponse
  */

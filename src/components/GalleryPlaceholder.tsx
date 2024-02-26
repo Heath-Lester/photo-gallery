@@ -1,3 +1,3 @@
 export default function GalleryPlaceholder({ displayText }: { displayText: string }): React.ReactNode {
-    return <span className='flex m-6 justify-center text-small'>{displayText}</span>;
+    return <div className='mt-24 text-center text-small fade-in-text'>{displayText}</div>;
 }

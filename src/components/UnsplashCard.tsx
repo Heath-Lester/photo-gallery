@@ -2,14 +2,12 @@ import Image from 'next/image';
 import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import { Card, Link } from '@nextui-org/react';
 import React from 'react';
-import { PressEvent } from '@react-types/shared/';
-import Router from 'next/router';
 
-export default function UnsplashCardSimple({ photo }: { photo: Basic }): React.ReactNode {
+export default function UnsplashCard({ photo }: { photo: Basic }): React.ReactNode {
     const widthHeightRatio: number = photo.height / photo.width;
     const cardHeight: number = Math.ceil(250 * widthHeightRatio);
     // divide card height by the auto rows pixels set in the gallery
-    const rowSpan: number = Math.ceil(cardHeight / 10) - 1;
+    const rowSpan: number = Math.ceil(cardHeight / 10) + 1;
 
     return (
         <Card
@@ -19,7 +17,7 @@ export default function UnsplashCardSimple({ photo }: { photo: Basic }): React.R
             style={{ gridRow: `span ${rowSpan}` }}
         >
             <Link
-                href={`?modal=true&photo=` + photo.id}
+                href={`/modal/` + photo.id}
                 className='grid-place-content-center justify-center cursor-pointer text-inherit overflow-hidden group'
             >
                 <Image

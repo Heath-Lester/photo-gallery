@@ -3,7 +3,7 @@ import React from 'react';
 import { ApiResponse } from 'unsplash-js/dist/helpers/response';
 import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
-import UnsplashCardSimple from './UnsplashCardSimple';
+import UnsplashCardSimple from './UnsplashCard';
 import GalleryPlaceholder from './GalleryPlaceholder';
 
 export default async function UnsplashGallery({
