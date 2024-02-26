@@ -1,14 +1,12 @@
-import { Modal } from '@nextui-org/react';
-import UnsplashImage from './UnsplashImage';
-import GalleryPlaceholder from './GalleryPlaceholder';
-import { Suspense } from 'react';
+import { Link } from '@nextui-org/react';
+import React from 'react';
 
-export default function UnsplashModal({ id }: { id: string }): React.ReactNode {
+export default function UnsplashModal({ children }: { children: React.ReactNode }): React.ReactNode {
+    console.warn('UNSPLASH MODAL ACTIVATED: ', !!children);
     return (
-        <Modal>
-            <Suspense fallback={<GalleryPlaceholder displayText='Loading...' />}>
-                <UnsplashImage id={id} />
-            </Suspense>
-        </Modal>
+        <dialog className='flex shadow-lg fixed justify-self-center self-center z-40 rounded-lg backdrop-blur'>
+            <Link href='/' />
+            {children}
+        </dialog>
     );
 }

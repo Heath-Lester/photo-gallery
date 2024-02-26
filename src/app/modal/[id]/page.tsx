@@ -1,4 +1,4 @@
-import GalleryPlaceholder from '@/components/GalleryPlaceholder';
+import UnsplashImage from '@/components/UnsplashImage';
 import UnsplashModal from '@/components/UnsplashModal';
 import { ModalParameters } from '@/types/modalParameters';
 import { Metadata } from 'next';
@@ -11,5 +11,9 @@ export function generateMetadata({ params: { id } }: ModalParameters): Metadata 
 
 export default function SelectedPhoto({ params: { id } }: ModalParameters): React.ReactNode {
     console.warn('SELECTED PHOTO: ', id);
-    return <UnsplashModal id={id} />;
+    return (
+        <UnsplashModal>
+            <UnsplashImage id={id} />
+        </UnsplashModal>
+    );
 }
