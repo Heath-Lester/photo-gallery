@@ -15,7 +15,9 @@ export default function ThemeToggleAlt(): React.ReactNode | undefined {
         setMounted(true);
     }, []);
 
-    if (mounted) {
+    if (!mounted) {
+        return <div className='flex w-full'></div>;
+    } else {
         return (
             <Tooltip
                 content={theme === 'dark' ? 'Light mode' : 'Dark mode'}

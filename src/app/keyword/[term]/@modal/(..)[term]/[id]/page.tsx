@@ -1,17 +1,19 @@
 import UnsplashImage from '@/components/UnsplashImage';
-import UnsplashModal from '@/components/UnsplashModal';
 import { ModalParameters } from '@/types/modalParameters';
 import { Metadata } from 'next';
 import React from 'react';
+import UnsplashClientModal from '@/components/UnsplashClientModal';
+import UnsplashSSRModal from '@/components/UnsplashSSRModal';
+import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
 
-export function generateMetadata({ params: { id, term } }: ModalParameters): Metadata {
+export function generateMetadata({ params: { term, id } }: ModalParameters): Metadata {
     return { title: `Photo: ` + id };
 }
 
-export default function SelectedPhoto({ params: { id, term } }: ModalParameters): React.ReactNode {
+export default function SelectedPhoto({ params: { term, id } }: ModalParameters): React.ReactNode {
     return (
-        <UnsplashModal>
+        <UnsplashSSRModal returnPath={`/${UnsplashSearchTypes.KEYWORD.toLowerCase()}/${term}`}>
             <UnsplashImage id={id} />
-        </UnsplashModal>
+        </UnsplashSSRModal>
     );
 }

@@ -19,14 +19,17 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
         const heightWidthRatio: number = image.width / image.height;
 
         return (
-            <Card radius='lg' className='flex flex-row relative overflow-hidden gap-4 p-4'>
+            <Card
+                radius='lg'
+                className='flex flex-row relative overflow-hidden gap-4 p-4 justify-center items-center align-middle'
+            >
                 <img
                     alt={image.alt_description ?? 'description'}
                     src={image.urls.full}
                     className={`object-cover max-h-[80vh] h-[80vh * ${heightWidthRatio}] max-w-[80vw] w-[80vw * ${widthHeightRatio}] rounded-md shadow-inner`}
                     sizes='500px'
                 />
-                <section className='flex flex-col ml-4 mb-auto text-small font-semibold gap-4 p-4 w-36 shadow-md rounded-md'>
+                <section className='flex flex-col mb-auto text-small font-semibold gap-4 p-4 max-w-48 min-w-48 shadow-md rounded-md'>
                     <Image
                         alt='Profile Image'
                         src={image.user.profile_image.large}

@@ -10,7 +10,6 @@ export function generateMetadata({ params: { term } }: SearchParameters): Metada
 }
 
 export default function keywordSearch({ params: { term } }: SearchParameters): React.ReactNode {
-    console.warn('KEYWORD PROPS: ', term);
     return (
         <Suspense fallback={<GalleryPlaceholder displayText='Loading...' />}>
             <UnsplashGallery
