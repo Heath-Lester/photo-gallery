@@ -3,22 +3,21 @@ import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import { Card, Link } from '@nextui-org/react';
 import React from 'react';
 
-export default function UnsplashCard({ photo }: { photo: Basic }): React.ReactNode {
+export default function UnsplashCard({ photo, pathname }: { photo: Basic; pathname: string }): React.ReactNode {
     const widthHeightRatio: number = photo.height / photo.width;
     const cardHeight: number = Math.ceil(250 * widthHeightRatio);
-
     // divide card height by the auto rows pixels set in the gallery
     const rowSpan: number = Math.ceil(cardHeight / 10) + 1;
 
     return (
         <Card
-            className='w-[250px] justify-self-center rounded-2xl mb-6'
+            className='w-[250px] justify-self-center rounded-2xl mb-6 fade-in-fast'
             shadow='lg'
             isPressable
             style={{ gridRow: `span ${rowSpan}` }}
         >
             <Link
-                href={`?photo=` + photo.id}
+                href={`/${pathname}/${photo.id}`}
                 className='grid-place-content-center justify-center cursor-pointer text-inherit overflow-hidden group'
             >
                 <Image

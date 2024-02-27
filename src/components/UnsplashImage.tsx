@@ -1,7 +1,5 @@
 import { UnsplashProvider } from '@/providers/unsplashProvider';
 import { Card } from '@nextui-org/react';
-import { px } from 'framer-motion';
-import Image from 'next/image';
 import { ApiResponse } from 'unsplash-js/dist/helpers/response';
 import { Full } from 'unsplash-js/dist/methods/photos/types';
 

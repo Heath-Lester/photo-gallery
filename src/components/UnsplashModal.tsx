@@ -1,20 +1,37 @@
 'use client';
+import { Modal, ModalBody, ModalContent, useDisclosure } from '@nextui-org/modal';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
-import { Link } from '@nextui-org/react';
-import { usePathname } from 'next/navigation';
-import React from 'react';
+export default function UnsplashModal({
+    children,
+    returnPath,
+}: {
+    children: React.ReactNode;
+    returnPath: string;
+}): React.ReactNode | null {
+    const router = useRouter();
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
-export default function UnsplashModal({ children }: { children: React.ReactNode }): React.ReactNode | null {
-    const pathname: string = usePathname();
+    useEffect(() => {
+        onOpen();
+    }, []);
 
-    console.warn('PATHNAME: ', pathname);
+    const handleClose = () => {
+        onClose();
+        router.back();
+    };
 
+    // <Modal isOpen={isOpen} onClose={handleClose} placement='center' backdrop='blur' size='5xl'>
+    //     <ModalContent>{(onClose) => <ModalBody>{children}</ModalBody>}</ModalContent>
+    // </Modal>
     return (
-        <Link
-            href={pathname}
-            className='flex tap-highlight-none transition-none hover:opacity-100 justify-center items-center content-center w-full h-full fixed filter top-0 left-0 z-30 backdrop-blur-sm'
+        <div
+            onClick={handleClose}
+            className='flex justify-center items-center content-center w-full h-full fixed top-0 left-0 z-30 backdrop-blur-sm'
         >
-            <dialog className='flex shadow-2xl fixed transform z-50 rounded-lg object-cover'>{children}</dialog>
-        </Link>
+            <dialog className='flex shadow-2xl z-50 rounded-lg'>{children}</dialog>
+        </div>
     );
 }
