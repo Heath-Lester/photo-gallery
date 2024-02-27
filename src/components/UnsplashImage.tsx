@@ -2,6 +2,8 @@ import { UnsplashProvider } from '@/providers/unsplashProvider';
 import { Card } from '@nextui-org/react';
 import { ApiResponse } from 'unsplash-js/dist/helpers/response';
 import { Full } from 'unsplash-js/dist/methods/photos/types';
+import UnsplashImageDetail from './UnsplashImageDetail';
+import Image from 'next/image';
 
 export default async function UnsplashImage({ id }: { id: string }): Promise<React.ReactElement | undefined> {
     const image: Full | undefined = await UnsplashProvider.fetchPhotoById(id).then(
@@ -17,49 +19,29 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
         const heightWidthRatio: number = image.width / image.height;
 
         return (
-            <Card className='flex flex-row h-full w-full relative overflow-hidden gap-3 px-4 py-3'>
+            <Card radius='lg' className='flex flex-row relative overflow-hidden gap-4 p-4'>
                 <img
                     alt={image.alt_description ?? 'description'}
                     src={image.urls.full}
                     className={`object-cover max-h-[80vh] h-[80vh * ${heightWidthRatio}] max-w-[80vw] w-[80vw * ${widthHeightRatio}] rounded-md shadow-inner`}
                     sizes='500px'
                 />
-                <section className='flex flex-col mx-2 mb-auto text-small font-semibold gap-3 p-4 min-w-min max-w-[15vw] shadow-md rounded-md'>
-                    <img
+                <section className='flex flex-col ml-4 mb-auto text-small font-semibold gap-4 p-4 w-36 shadow-md rounded-md'>
+                    <Image
                         alt='Profile Image'
                         src={image.user.profile_image.large}
-                        className='rounded-full max-h-36 max-w-36 my-2 shadow-inner content-center self-center min-w-m'
+                        width={144}
+                        height={144}
+                        sizes='144px'
+                        className='rounded-full self-center'
                     />
-                    {image.user.name ? (
-                        <div className='mb-3'>
-                            <p className='opacity-50'>Name</p>
-                            <p className='pl-3'>{image.user.name}</p>
-                        </div>
-                    ) : null}
-                    {image.user.instagram_username ? (
-                        <div className='mb-3'>
-                            <p className='opacity-50'>Instagram</p>
-                            <p className='pl-3'>{image.user.instagram_username}</p>
-                        </div>
-                    ) : null}
-                    {image.user.location ? (
-                        <div className='mb-3'>
-                            <p className='opacity-50'>Location</p>
-                            <p className='pl-3'>{image.user.location}</p>
-                        </div>
-                    ) : null}
-                    {image.user.bio ? (
-                        <div className='mb-3'>
-                            <p className='opacity-50'>Bio</p>
-                            <p className='pl-3'>{image.user.bio}</p>
-                        </div>
-                    ) : null}
-                    {image.description ? (
-                        <div className='mb-3'>
-                            <p className='opacity-50'>Description</p>
-                            <p className='pl-3 max-w-fit'>{image.description}</p>
-                        </div>
-                    ) : null}
+                    <div className='overflow-y-auto shadow-inner'>
+                        <UnsplashImageDetail title='Name' content={image.user.name} />
+                        <UnsplashImageDetail title='Instagram' content={image.user.instagram_username} />
+                        <UnsplashImageDetail title='Location' content={image.user.location} />
+                        <UnsplashImageDetail title='Bio' content={image.user.bio} />
+                        <UnsplashImageDetail title='Description' content={image.description} />
+                    </div>
                 </section>
             </Card>
         );

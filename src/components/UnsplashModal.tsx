@@ -1,31 +1,12 @@
 'use client';
-import { Modal, ModalBody, ModalContent, useDisclosure } from '@nextui-org/modal';
-import Link from 'next/link';
+
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-export default function UnsplashModal({
-    children,
-    returnPath,
-}: {
-    children: React.ReactNode;
-    returnPath: string;
-}): React.ReactNode | null {
+export default function UnsplashModal({ children }: { children: React.ReactNode }): React.ReactNode {
     const router = useRouter();
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const handleClose = (): void => router.back();
 
-    useEffect(() => {
-        onOpen();
-    }, []);
-
-    const handleClose = () => {
-        onClose();
-        router.back();
-    };
-
-    // <Modal isOpen={isOpen} onClose={handleClose} placement='center' backdrop='blur' size='5xl'>
-    //     <ModalContent>{(onClose) => <ModalBody>{children}</ModalBody>}</ModalContent>
-    // </Modal>
     return (
         <div
             onClick={handleClose}
