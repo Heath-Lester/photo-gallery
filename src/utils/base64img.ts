@@ -1,7 +1,6 @@
 import { getPlaiceholder } from 'plaiceholder';
 import { ApiResponse } from 'unsplash-js/dist/helpers/response';
-import { Basic, Full } from 'unsplash-js/dist/methods/photos/types';
-
+import { Basic, Full, Random } from 'unsplash-js/dist/methods/photos/types';
 /**
  * {@link https://www.youtube.com/watch?v=Br6f1i-QNCY&list=PL4cUxeGkcC9hYBP0AZ3MNdEiiZqd4mHGm&index=7}
  * {@link https://plaiceholder.co/docs/usage}
@@ -45,6 +44,27 @@ export async function addBlurHashToUnsplashImages(
     unsplashResponse.response.results.forEach(
         (image: Basic, index: number) => (image.blur_hash = base64Results[index]),
     );
+
+    return unsplashResponse;
+}
+
+/**
+ * Add Blur hash to multiple images in parallel using Plaiceholder
+ * {@link https://plaiceholder.co/docs}
+ * @param unsplashResponse
+ */
+export async function addBlurHashToUnsplashRandomImages(
+    unsplashResponse: ApiResponse<Random[]>,
+): Promise<ApiResponse<Random[]>> {
+    if (!unsplashResponse.response || unsplashResponse.response.length === 0) throw Error('Response is falsy or empty');
+
+    const base64Promises: Array<Promise<string>> = unsplashResponse.response.map((image: Random) =>
+        getBase64(image.urls.full),
+    );
+
+    const base64Results: string[] = await Promise.all(base64Promises);
+
+    unsplashResponse.response.forEach((image: Random, index: number) => (image.blur_hash = base64Results[index]));
 
     return unsplashResponse;
 }

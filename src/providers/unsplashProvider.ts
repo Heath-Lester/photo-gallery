@@ -1,9 +1,13 @@
-import { addBlurHashToUnsplashImage, addBlurHashToUnsplashImages } from '@/utils/base64img';
+import {
+    addBlurHashToUnsplashImage,
+    addBlurHashToUnsplashImages,
+    addBlurHashToUnsplashRandomImages,
+} from '@/utils/base64img';
 import { AdditionalFetchOptions } from 'unsplash-js/dist/helpers/request';
 import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
 import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
 import { ApiResponse } from 'unsplash-js/dist/helpers/response';
-import { Basic, Full } from 'unsplash-js/dist/methods/photos/types';
+import { Basic, Full, Random } from 'unsplash-js/dist/methods/photos/types';
 import { createApi } from 'unsplash-js';
 import * as nodeFetch from 'node-fetch';
 import env from '@/env/env';
@@ -105,6 +109,25 @@ export class UnsplashProvider {
             )
             .then((response: ApiResponse<{ results: Basic[]; total: number }>) => addBlurHashToUnsplashImages(response))
             .then((response: ApiResponse<{ results: Basic[]; total: number }>) => response.response)
+            .catch((err) => {
+                console.error('Failed to fetch images by topic', err);
+            });
+    }
+
+    public static async fetchRandomPhotos(page?: number | null, perPage?: number | null): Promise<void | Random[]> {
+        return await this.unsplash.photos
+            .getRandom(
+                {
+                    count: perPage ?? this.defaultPageSize,
+                },
+                this.fetchOptions,
+            )
+            .then((response: ApiResponse<Random | Random[]>) => {
+                response.response = new Array<Random>().concat(response.response ?? []);
+                return response as ApiResponse<Random[]>;
+            })
+            .then((response: ApiResponse<Random[]>) => addBlurHashToUnsplashRandomImages(response))
+            .then((response: ApiResponse<Random[]>) => response.response)
             .catch((err) => {
                 console.error('Failed to fetch images by topic', err);
             });
