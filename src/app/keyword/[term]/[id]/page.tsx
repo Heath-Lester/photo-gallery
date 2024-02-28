@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import React, { Suspense } from 'react';
 
 export function generateMetadata({ params: { term, id } }: ModalParameters): Metadata {
-    return { title: `Photo Gallery: ` + term };
+    return { title: `Photo Gallery | ` + term };
 }
 
 export default function PhotoPage({ params: { term, id } }: ModalParameters): React.ReactNode | void {

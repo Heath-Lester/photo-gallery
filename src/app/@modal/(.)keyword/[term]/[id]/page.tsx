@@ -7,7 +7,7 @@ import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
 import { Metadata } from 'next';
 
 export function generateMetadata({ params: { term, id } }: ModalParameters): Metadata {
-    return { title: `Photo Gallery: ` + term };
+    return { title: `Photo Gallery | ` + term };
 }
 
 export default function InterceptingPhotoPage({ params: { term, id } }: ModalParameters): React.ReactNode {
