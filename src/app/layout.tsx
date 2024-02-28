@@ -12,13 +12,22 @@ export const metadata: Metadata = {
     description: 'Coding Assessment for MicroHealth',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }): React.ReactNode {
+export default function RootLayout({
+    children,
+    modal,
+}: {
+    children: React.ReactNode;
+    modal: React.ReactNode;
+}): React.ReactNode {
     return (
         <html lang='en'>
             <body className={inter.className}>
                 <Providers>
                     <NavBar />
-                    <main>{children}</main>
+                    <main>
+                        {children}
+                        {modal}
+                    </main>
                 </Providers>
             </body>
         </html>

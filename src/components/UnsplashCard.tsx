@@ -17,7 +17,7 @@ export default function UnsplashCard({ photo, pathname }: { photo: Basic; pathna
             style={{ gridRow: `span ${rowSpan}` }}
         >
             <Link
-                href={`/${pathname}/${photo.id}`}
+                href={`/${pathname}/photo/${photo.id}`}
                 className='grid-place-content-center justify-center cursor-pointer text-inherit overflow-hidden group'
             >
                 <Image
