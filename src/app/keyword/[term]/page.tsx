@@ -6,7 +6,7 @@ import GalleryPlaceholder from '@/components/GalleryPlaceholder';
 import UnsplashGallery from '@/components/UnsplashGallery';
 
 export function generateMetadata({ params: { term } }: SearchParameters): Metadata {
-    return { title: `Photo Gallery | ` + term };
+    return { title: `Photo Gallery | ` + decodeURI(term) };
 }
 
 export default function keywordSearch({ params: { term } }: SearchParameters): ReactNode {
@@ -15,7 +15,7 @@ export default function keywordSearch({ params: { term } }: SearchParameters): R
             <UnsplashGallery
                 searchParams={{
                     searchType: UnsplashSearchTypes.KEYWORD,
-                    term,
+                    term: decodeURI(term),
                 }}
             />
         </Suspense>

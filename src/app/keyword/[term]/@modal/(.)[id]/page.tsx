@@ -5,7 +5,7 @@ import UnsplashModal from '@/components/UnsplashModal';
 import UnsplashImage from '@/components/UnsplashImage';
 
 export function generateMetadata({ params: { term, id } }: ModalParameters): Metadata {
-    return { title: `Photo Gallery | ` + term };
+    return { title: `Photo Gallery | ` + decodeURI(term) };
 }
 
 export default function InterceptingPhotoPage({ params: { term, id } }: ModalParameters): ReactNode {
