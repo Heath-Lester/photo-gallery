@@ -62,6 +62,7 @@ export default function SearchBar(): ReactNode | undefined {
                             variant='solid'
                             disallowEmptySelection
                             selectionMode='single'
+                            disabledKeys={[UnsplashSearchTypes.LIST.toString()]}
                             selectedKeys={selectedSearchType}
                             onSelectionChange={(keys: Selection) => {
                                 setSearchTypes(keys as Set<UnsplashSearchTypes>);
