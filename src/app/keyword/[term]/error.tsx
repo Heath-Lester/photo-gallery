@@ -5,5 +5,5 @@ import React from 'react';
 
 export default function Error(): React.ReactNode {
     console.error('Term path error');
-    return <GalleryPlaceholder displayText='An error occurred' />;
+    return <GalleryPlaceholder displayText='An unexpected error occurred.' />;
 }

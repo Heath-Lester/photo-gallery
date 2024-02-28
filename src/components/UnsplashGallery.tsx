@@ -1,6 +1,5 @@
 import { UnsplashProvider } from '@/providers/unsplashProvider';
 import React from 'react';
-import { ApiResponse } from 'unsplash-js/dist/helpers/response';
 import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
 import GalleryPlaceholder from './GalleryPlaceholder';

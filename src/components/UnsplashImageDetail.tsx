@@ -11,7 +11,7 @@ export default function UnsplashImageDetail({
     return !!content && content.length > 0 ? (
         <div className='mb-3'>
             <p className='opacity-50'>{title}</p>
-            <p className='pl-3'>{content}</p>
+            <p className='pl-3 text-small break-words'>{content}</p>
         </div>
     ) : null;
 }

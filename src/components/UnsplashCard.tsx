@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { Basic } from 'unsplash-js/dist/methods/photos/types';
-import { Card, Link } from '@nextui-org/react';
+import { Card } from '@nextui-org/react';
 import React from 'react';
+import Link from 'next/link';
 
 export default function UnsplashCard({ photo, pathname }: { photo: Basic; pathname: string }): React.ReactNode {
     const widthHeightRatio: number = photo.height / photo.width;
@@ -17,7 +18,7 @@ export default function UnsplashCard({ photo, pathname }: { photo: Basic; pathna
             style={{ gridRow: `span ${rowSpan}` }}
         >
             <Link
-                href={`/${pathname}/photo/${photo.id}`}
+                href={`/${pathname}/${photo.id}`}
                 className='grid-place-content-center justify-center cursor-pointer text-inherit overflow-hidden group'
             >
                 <Image
