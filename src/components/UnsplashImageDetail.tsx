@@ -9,7 +9,7 @@ export default function UnsplashImageDetail({
     content: string | Nullable<string> | null;
 }): ReactNode | null {
     return !!content && content.length > 0 ? (
-        <div className='mb-3'>
+        <div>
             <p className='opacity-50'>{title}</p>
             <p className='pl-3 text-small break-words'>{content}</p>
         </div>
