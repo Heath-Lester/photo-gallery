@@ -16,7 +16,7 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                 <img
                     alt={image.alt_description ?? 'description'}
                     src={image.urls.full}
-                    className={`rounded-2xl shadow-inner max-h-[80vh] max-w[80vw] h-[calc(80vh * ${heightWidthRatio}) - 192px] w-[calc(80vw * ${widthHeightRatio}) - 192px]`}
+                    className={`rounded-2xl shadow-md max-h-[80vh] max-w[80vw] h-[calc(80vh * ${heightWidthRatio}) - 192px] w-[calc(80vw * ${widthHeightRatio}) - 192px]`}
                 />
                 <section className='flex flex-row-reverse justify-between lg:flex-col max-h-42 lg:max-h-[unset] lg:mb-auto text-small font-semibold gap-4 p-4 lg:max-w-48 lg:min-w-48 shadow-md rounded-lg'>
                     <Image
@@ -25,9 +25,9 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                         width={144}
                         height={144}
                         sizes='144px'
-                        className='rounded-full self-center'
+                        className='rounded-full self-center shadow-inner'
                     />
-                    <div className='flex flex-col overflow-y-auto shadow-inner'>
+                    <div className='flex flex-col overflow-y-auto'>
                         <UnsplashImageDetail title='Name' content={image.user.name} />
                         <UnsplashImageDetail title='Instagram' content={image.user.instagram_username} />
                         <UnsplashImageDetail title='Location' content={image.user.location} />

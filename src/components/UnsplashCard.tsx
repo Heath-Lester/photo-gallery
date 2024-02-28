@@ -15,11 +15,12 @@ export default function UnsplashCard({ photo, pathname }: { photo: Basic; pathna
             className='w-[250px] justify-self-center rounded-2xl mb-6 fade-in-fast'
             shadow='lg'
             isPressable
+            allowTextSelectionOnPress
             style={{ gridRow: `span ${rowSpan}` }}
         >
             <Link
                 href={`/${pathname}/${photo.id}`}
-                className='grid-place-content-center justify-center cursor-pointer text-inherit overflow-hidden group'
+                className='grid-place-content-center text-medium inline-flex justify-center cursor-pointer overflow-hidden group'
             >
                 <Image
                     alt={photo.alt_description ?? 'description'}
@@ -34,7 +35,7 @@ export default function UnsplashCard({ photo, pathname }: { photo: Basic; pathna
                     className='object-cover group-hover:opacity-50 duration-700 z-10'
                     sizes='250px'
                 />
-                <div className='to-overlay absolute'>{photo.user.username}</div>
+                <div className='to-overlay self-center absolute'>{photo.user.username}</div>
             </Link>
         </Card>
     );
