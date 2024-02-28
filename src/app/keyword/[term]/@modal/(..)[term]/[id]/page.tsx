@@ -11,9 +11,17 @@ export function generateMetadata({ params: { term, id } }: ModalParameters): Met
 }
 
 export default function SelectedPhoto({ params: { term, id } }: ModalParameters): React.ReactNode {
-    return (
+    const ssrModal: React.ReactNode = (
         <UnsplashSSRModal returnPath={`/${UnsplashSearchTypes.KEYWORD.toLowerCase()}/${term}`}>
             <UnsplashImage id={id} />
         </UnsplashSSRModal>
     );
+
+    const clientModal: React.ReactNode = (
+        <UnsplashClientModal>
+            <UnsplashImage id={id} />
+        </UnsplashClientModal>
+    );
+
+    return clientModal;
 }

@@ -7,7 +7,7 @@ export default function UnsplashImageDetail({
 }: {
     title: string;
     content: string | Nullable<string> | null;
-}): React.ReactElement | null {
+}): React.ReactNode | null {
     return !!content && content.length > 0 ? (
         <div className='mb-3'>
             <p className='opacity-50'>{title}</p>

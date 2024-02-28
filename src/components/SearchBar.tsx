@@ -12,6 +12,7 @@ import {
 } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
+import ClientComponentPlaceholder from './ClientComponentPlaceholder';
 
 export default function SearchBar(): React.ReactNode | undefined {
     const [mounted, setMounted] = useState(false);
@@ -40,7 +41,7 @@ export default function SearchBar(): React.ReactNode | undefined {
     }, []);
 
     if (!mounted) {
-        return <div className='flex w-full'></div>;
+        return <ClientComponentPlaceholder />;
     } else {
         return (
             <search className='flex flex-row max-w-screen-sm w-full items-center fade-in-fast'>

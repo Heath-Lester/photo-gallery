@@ -6,10 +6,14 @@ import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
 import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
 import * as nodeFetch from 'node-fetch';
 import { addBlurHashToUnsplashImage, addBlurHashToUnsplashImages } from '@/utils/base64img';
+import { AdditionalFetchOptions } from 'unsplash-js/dist/helpers/request';
 
 export class UnsplashProvider {
     private static readonly defaultPageNumber: number = 1;
     private static readonly defaultPageSize: number = 10;
+    private static readonly fetchOptions: AdditionalFetchOptions = {
+        cache: 'no-store',
+    };
     private static readonly unsplash = createApi({
         accessKey: env.UNSPLASH_ACCESS_KEY,
         fetch: nodeFetch.default as unknown as typeof fetch,
@@ -41,7 +45,7 @@ export class UnsplashProvider {
         if (!id || id.length === 0) return console.error(new Error('Provided id is falsy or empty'));
 
         return await this.unsplash.photos
-            .get({ photoId: id })
+            .get({ photoId: id }, this.fetchOptions)
             .then((response: ApiResponse<Full>) => addBlurHashToUnsplashImage(response))
             .catch((err) => {
                 console.error('Failed to fetch image by id', err);
@@ -56,11 +60,14 @@ export class UnsplashProvider {
         if (!name || name.length === 0) return console.error(new Error('Provided topic is falsy or empty'));
 
         return await this.unsplash.users
-            .getPhotos({
-                username: name,
-                page: page ?? this.defaultPageNumber,
-                perPage: perPage ?? this.defaultPageSize,
-            })
+            .getPhotos(
+                {
+                    username: name,
+                    page: page ?? this.defaultPageNumber,
+                    perPage: perPage ?? this.defaultPageSize,
+                },
+                this.fetchOptions,
+            )
             .then((response: ApiResponse<{ results: Basic[]; total: number }>) => addBlurHashToUnsplashImages(response))
             .catch((err) => {
                 console.error('Failed to fetch images by user', err);
@@ -75,11 +82,14 @@ export class UnsplashProvider {
         if (!topic || topic.length === 0) return console.error('Provided topic is falsy or empty');
 
         return await this.unsplash.topics
-            .getPhotos({
-                topicIdOrSlug: topic,
-                page: page ?? this.defaultPageNumber,
-                perPage: perPage ?? this.defaultPageSize,
-            })
+            .getPhotos(
+                {
+                    topicIdOrSlug: topic,
+                    page: page ?? this.defaultPageNumber,
+                    perPage: perPage ?? this.defaultPageSize,
+                },
+                this.fetchOptions,
+            )
             .then((response: ApiResponse<{ results: Basic[]; total: number }>) => addBlurHashToUnsplashImages(response))
             .catch((err) => {
                 console.error('Failed to fetch images by topic', err);
@@ -94,10 +104,13 @@ export class UnsplashProvider {
         total: number;
     }>> {
         return await this.unsplash.photos
-            .list({
-                page: page ?? this.defaultPageNumber,
-                perPage: perPage ?? this.defaultPageSize,
-            })
+            .list(
+                {
+                    page: page ?? this.defaultPageNumber,
+                    perPage: perPage ?? this.defaultPageSize,
+                },
+                this.fetchOptions,
+            )
             .then((response: ApiResponse<{ results: Basic[]; total: number }>) => addBlurHashToUnsplashImages(response))
             .catch((err) => {
                 console.error('Failed to fetch images', err);
@@ -112,11 +125,14 @@ export class UnsplashProvider {
         if (!keyword || keyword.length === 0) return console.error('Provided keyword is falsy or empty');
 
         return await this.unsplash.search
-            .getPhotos({
-                query: keyword,
-                page: page ?? this.defaultPageNumber,
-                perPage: perPage ?? this.defaultPageSize,
-            })
+            .getPhotos(
+                {
+                    query: keyword,
+                    page: page ?? this.defaultPageNumber,
+                    perPage: perPage ?? this.defaultPageSize,
+                },
+                this.fetchOptions,
+            )
             .then((response: ApiResponse<{ results: Basic[]; total: number }>) => addBlurHashToUnsplashImages(response))
             .catch((err) => {
                 console.error('Failed to fetch searched images', err);

@@ -6,6 +6,7 @@ import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { FiSun } from 'react-icons/fi';
 import { IoMoon } from 'react-icons/io5';
+import ClientComponentPlaceholder from './ClientComponentPlaceholder';
 
 export default function ThemeToggleAlt(): React.ReactNode | undefined {
     const [mounted, setMounted] = useState<boolean>(false);
@@ -16,7 +17,7 @@ export default function ThemeToggleAlt(): React.ReactNode | undefined {
     }, []);
 
     if (!mounted) {
-        return <div className='flex w-full'></div>;
+        return <ClientComponentPlaceholder />;
     } else {
         return (
             <Tooltip
