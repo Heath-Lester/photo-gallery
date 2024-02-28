@@ -5,7 +5,7 @@ import UnsplashClientModal from '@/components/UnsplashClientModal';
 import UnsplashSSRModal from '@/components/UnsplashSSRModal';
 import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
 
-export default function InterceptedModalPage({ params: { term, id } }: ModalParameters): React.ReactNode {
+export default function InterceptedPhotoPage({ params: { term, id } }: ModalParameters): React.ReactNode {
     const ssrModal: React.ReactNode = (
         <UnsplashSSRModal returnPath={`/${UnsplashSearchTypes.KEYWORD.toLowerCase()}/${term}`}>
             <UnsplashImage id={id} />
