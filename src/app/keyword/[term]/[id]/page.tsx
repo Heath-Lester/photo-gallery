@@ -1,12 +1,7 @@
 import ModalPlaceholder from '@/components/ModalPlaceholder';
 import UnsplashImage from '@/components/UnsplashImage';
 import { ModalParameters } from '@/types/modalParameters';
-import { Metadata } from 'next';
 import React, { Suspense } from 'react';
-
-export function generateMetadata({ params: { term, id } }: ModalParameters): Metadata {
-    return { title: `Photo: ` + id };
-}
 
 export default function PhotoPage({ params: { term, id } }: ModalParameters): React.ReactNode | void {
     return (
