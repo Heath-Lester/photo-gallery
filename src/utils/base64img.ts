@@ -9,7 +9,7 @@ import { Basic, Full } from 'unsplash-js/dist/methods/photos/types';
  */
 async function getBase64(imageUrl: string): Promise<string> {
     try {
-        const response: Response = await fetch(imageUrl);
+        const response: Response = await fetch(imageUrl, { cache: 'no-store' });
 
         if (!response.ok) {
             throw Error(`Failed to fetch image: ${response.status}, ${response.statusText} `);

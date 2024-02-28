@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function TermLayout({
+export default function KeywordLayout({
     children,
     modal,
 }: {

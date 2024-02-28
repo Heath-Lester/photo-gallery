@@ -18,5 +18,5 @@ export default function InterceptingPhotoPage({ params: { term, id } }: ModalPar
         </UnsplashClientModal>
     );
 
-    return clientModal;
+    return ssrModal;
 }
