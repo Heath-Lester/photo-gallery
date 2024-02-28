@@ -1,18 +1,10 @@
 import { UnsplashProvider } from '@/providers/unsplashProvider';
-import { Card } from '@nextui-org/react';
-import { ApiResponse } from 'unsplash-js/dist/helpers/response';
 import { Full } from 'unsplash-js/dist/methods/photos/types';
 import UnsplashImageDetail from './UnsplashImageDetail';
 import Image from 'next/image';
 
 export default async function UnsplashImage({ id }: { id: string }): Promise<React.ReactElement | undefined> {
-    const image: Full | undefined = await UnsplashProvider.fetchPhotoById(id).then(
-        (response: ApiResponse<Full> | void) => {
-            if (response && response.response) {
-                return response.response;
-            }
-        },
-    );
+    const image: Full | void = await UnsplashProvider.fetchPhotoByIdWithoutBlur(id);
 
     if (image) {
         const widthHeightRatio: number = image.height / image.width;

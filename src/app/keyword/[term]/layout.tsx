@@ -1,10 +1,16 @@
 import React from 'react';
 
-export default function TermLayout(props: { children: React.ReactNode; modal: React.ReactNode }): React.ReactNode {
+export default function TermLayout({
+    children,
+    modal,
+}: {
+    children: React.ReactNode;
+    modal: React.ReactNode;
+}): React.ReactNode {
     return (
         <>
-            {props.children}
-            {props.modal}
+            {children}
+            {modal}
         </>
     );
 }

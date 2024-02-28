@@ -21,7 +21,7 @@ export class UnsplashProvider {
 
     public static async fetchBySearchParams(
         searchParams: UnsplashSearchParams,
-    ): Promise<void | ApiResponse<{ results: Basic[]; total: number }>> {
+    ): Promise<void | { results: Basic[]; total: number }> {
         switch (searchParams.searchType) {
             case UnsplashSearchTypes.KEYWORD: {
                 return this.fetchPhotosBySearch(searchParams.term);
@@ -41,12 +41,24 @@ export class UnsplashProvider {
         }
     }
 
-    public static async fetchPhotoById(id: string): Promise<void | ApiResponse<Full>> {
+    public static async fetchPhotoById(id: string): Promise<void | Full> {
         if (!id || id.length === 0) return console.error(new Error('Provided id is falsy or empty'));
 
         return await this.unsplash.photos
             .get({ photoId: id }, this.fetchOptions)
             .then((response: ApiResponse<Full>) => addBlurHashToUnsplashImage(response))
+            .then((response: ApiResponse<Full>) => response.response)
+            .catch((err) => {
+                console.error('Failed to fetch image by id', err);
+            });
+    }
+
+    public static async fetchPhotoByIdWithoutBlur(id: string): Promise<void | Full> {
+        if (!id || id.length === 0) return console.error(new Error('Provided id is falsy or empty'));
+
+        return await this.unsplash.photos
+            .get({ photoId: id }, this.fetchOptions)
+            .then((response: ApiResponse<Full>) => response.response)
             .catch((err) => {
                 console.error('Failed to fetch image by id', err);
             });
@@ -56,7 +68,7 @@ export class UnsplashProvider {
         name: string,
         page?: number | null,
         perPage?: number | null,
-    ): Promise<void | ApiResponse<{ results: Basic[]; total: number }>> {
+    ): Promise<void | { results: Basic[]; total: number }> {
         if (!name || name.length === 0) return console.error(new Error('Provided topic is falsy or empty'));
 
         return await this.unsplash.users
@@ -69,6 +81,7 @@ export class UnsplashProvider {
                 this.fetchOptions,
             )
             .then((response: ApiResponse<{ results: Basic[]; total: number }>) => addBlurHashToUnsplashImages(response))
+            .then((response: ApiResponse<{ results: Basic[]; total: number }>) => response.response)
             .catch((err) => {
                 console.error('Failed to fetch images by user', err);
             });
@@ -78,7 +91,7 @@ export class UnsplashProvider {
         topic: string,
         page?: number | null,
         perPage?: number | null,
-    ): Promise<void | ApiResponse<{ results: Basic[]; total: number }>> {
+    ): Promise<void | { results: Basic[]; total: number }> {
         if (!topic || topic.length === 0) return console.error('Provided topic is falsy or empty');
 
         return await this.unsplash.topics
@@ -91,6 +104,7 @@ export class UnsplashProvider {
                 this.fetchOptions,
             )
             .then((response: ApiResponse<{ results: Basic[]; total: number }>) => addBlurHashToUnsplashImages(response))
+            .then((response: ApiResponse<{ results: Basic[]; total: number }>) => response.response)
             .catch((err) => {
                 console.error('Failed to fetch images by topic', err);
             });
@@ -99,10 +113,10 @@ export class UnsplashProvider {
     public static async fetchPhotos(
         page?: number | null,
         perPage?: number | null,
-    ): Promise<void | ApiResponse<{
+    ): Promise<void | {
         results: Basic[];
         total: number;
-    }>> {
+    }> {
         return await this.unsplash.photos
             .list(
                 {
@@ -112,6 +126,7 @@ export class UnsplashProvider {
                 this.fetchOptions,
             )
             .then((response: ApiResponse<{ results: Basic[]; total: number }>) => addBlurHashToUnsplashImages(response))
+            .then((response: ApiResponse<{ results: Basic[]; total: number }>) => response.response)
             .catch((err) => {
                 console.error('Failed to fetch images', err);
             });
@@ -121,7 +136,7 @@ export class UnsplashProvider {
         keyword: string,
         page?: number | null,
         perPage?: number | null,
-    ): Promise<void | ApiResponse<{ results: Basic[]; total: number }>> {
+    ): Promise<void | { results: Basic[]; total: number }> {
         if (!keyword || keyword.length === 0) return console.error('Provided keyword is falsy or empty');
 
         return await this.unsplash.search
@@ -134,6 +149,7 @@ export class UnsplashProvider {
                 this.fetchOptions,
             )
             .then((response: ApiResponse<{ results: Basic[]; total: number }>) => addBlurHashToUnsplashImages(response))
+            .then((response: ApiResponse<{ results: Basic[]; total: number }>) => response.response)
             .catch((err) => {
                 console.error('Failed to fetch searched images', err);
             });
