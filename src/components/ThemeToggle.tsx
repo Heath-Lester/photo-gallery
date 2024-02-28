@@ -3,12 +3,12 @@
 import { Button } from '@nextui-org/button';
 import { Tooltip } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { FiSun } from 'react-icons/fi';
 import { IoMoon } from 'react-icons/io5';
 import ClientComponentPlaceholder from './ClientComponentPlaceholder';
 
-export default function ThemeToggleAlt(): React.ReactNode | undefined {
+export default function ThemeToggleAlt(): ReactNode | undefined {
     const [mounted, setMounted] = useState<boolean>(false);
     const { theme, setTheme } = useTheme();
 

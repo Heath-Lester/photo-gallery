@@ -1,9 +1,10 @@
 import { UnsplashProvider } from '@/providers/unsplashProvider';
+import { ReactElement } from 'react';
 import { Full } from 'unsplash-js/dist/methods/photos/types';
 import UnsplashImageDetail from './UnsplashImageDetail';
 import Image from 'next/image';
 
-export default async function UnsplashImage({ id }: { id: string }): Promise<React.ReactElement | undefined> {
+export default async function UnsplashImage({ id }: { id: string }): Promise<ReactElement | undefined> {
     const image: Full | void = await UnsplashProvider.fetchPhotoByIdWithoutBlur(id);
 
     if (image) {

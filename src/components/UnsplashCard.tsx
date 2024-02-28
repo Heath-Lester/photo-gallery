@@ -1,10 +1,10 @@
-import Image from 'next/image';
+import { ReactNode } from 'react';
 import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import { Card } from '@nextui-org/react';
-import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
-export default function UnsplashCard({ photo, pathname }: { photo: Basic; pathname: string }): React.ReactNode {
+export default function UnsplashCard({ photo, pathname }: { photo: Basic; pathname: string }): ReactNode {
     const widthHeightRatio: number = photo.height / photo.width;
     const cardHeight: number = Math.ceil(250 * widthHeightRatio);
     // divide card height by the auto rows pixels set in the gallery

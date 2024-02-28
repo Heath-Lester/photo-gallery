@@ -11,10 +11,10 @@ import {
     Selection,
 } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { FormEvent, ReactNode, useEffect, useMemo, useState } from 'react';
 import ClientComponentPlaceholder from './ClientComponentPlaceholder';
 
-export default function SearchBar(): React.ReactNode | undefined {
+export default function SearchBar(): ReactNode | undefined {
     const [mounted, setMounted] = useState(false);
     const [searchTypes, setSearchTypes] = useState<Set<UnsplashSearchTypes>>(new Set([UnsplashSearchTypes.KEYWORD]));
     const [term, setTerm] = useState('');

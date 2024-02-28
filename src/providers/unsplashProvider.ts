@@ -1,12 +1,12 @@
-import env from '@/env/env';
-import { createApi } from 'unsplash-js';
-import { ApiResponse } from 'unsplash-js/dist/helpers/response';
-import { Basic, Full } from 'unsplash-js/dist/methods/photos/types';
-import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
-import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
-import * as nodeFetch from 'node-fetch';
 import { addBlurHashToUnsplashImage, addBlurHashToUnsplashImages } from '@/utils/base64img';
 import { AdditionalFetchOptions } from 'unsplash-js/dist/helpers/request';
+import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
+import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
+import { ApiResponse } from 'unsplash-js/dist/helpers/response';
+import { Basic, Full } from 'unsplash-js/dist/methods/photos/types';
+import { createApi } from 'unsplash-js';
+import * as nodeFetch from 'node-fetch';
+import env from '@/env/env';
 
 export class UnsplashProvider {
     private static readonly defaultPageNumber: number = 1;

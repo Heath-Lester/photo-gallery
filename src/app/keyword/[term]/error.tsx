@@ -1,9 +1,9 @@
 'use client';
 
+import { ReactNode } from 'react';
 import GalleryPlaceholder from '@/components/GalleryPlaceholder';
-import React from 'react';
 
-export default function Error(): React.ReactNode {
+export default function Error(): ReactNode {
     console.error('Term path error');
     return <GalleryPlaceholder displayText='An unexpected error occurred.' />;
 }

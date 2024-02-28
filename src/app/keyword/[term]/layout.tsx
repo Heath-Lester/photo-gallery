@@ -1,12 +1,6 @@
-import React from 'react';
+import { ReactNode } from 'react';
 
-export default function Layout({
-    children,
-    modal,
-}: {
-    children: React.ReactNode;
-    modal: React.ReactNode;
-}): React.ReactNode {
+export default function Layout({ children, modal }: { children: ReactNode; modal: ReactNode }): ReactNode {
     return (
         <>
             {children}

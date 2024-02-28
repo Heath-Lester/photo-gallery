@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import SearchBar from './SearchBar';
-import ThemeToggle from './ThemeToggle';
-import { Suspense } from 'react';
+import { ReactNode, Suspense } from 'react';
 import ClientComponentPlaceholder from './ClientComponentPlaceholder';
+import ThemeToggle from './ThemeToggle';
+import SearchBar from './SearchBar';
+import Link from 'next/link';
 
-export default function NavBar(): React.ReactNode {
+export default function NavBar(): ReactNode {
     return (
         <header
             className={`sticky pt-3 pb-3 px-5 min-h-[65px] top-0 z-20 shadow-lg bg-background border-solid border-b-small`}

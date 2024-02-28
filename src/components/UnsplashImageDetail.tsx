@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { Nullable } from 'unsplash-js/dist/helpers/typescript';
 
 export default function UnsplashImageDetail({
@@ -7,7 +7,7 @@ export default function UnsplashImageDetail({
 }: {
     title: string;
     content: string | Nullable<string> | null;
-}): React.ReactNode | null {
+}): ReactNode | null {
     return !!content && content.length > 0 ? (
         <div className='mb-3'>
             <p className='opacity-50'>{title}</p>

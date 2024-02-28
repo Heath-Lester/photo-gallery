@@ -1,7 +1,7 @@
-import { UnsplashProvider } from '@/providers/unsplashProvider';
-import React from 'react';
-import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
+import { UnsplashProvider } from '@/providers/unsplashProvider';
+import { ReactElement } from 'react';
+import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import GalleryPlaceholder from './GalleryPlaceholder';
 import UnsplashCard from './UnsplashCard';
 
@@ -9,7 +9,7 @@ export default async function UnsplashGallery({
     searchParams,
 }: {
     searchParams: UnsplashSearchParams;
-}): Promise<React.ReactElement> {
+}): Promise<ReactElement> {
     if (!searchParams.term || searchParams.term.length === 0) {
         return <GalleryPlaceholder displayText='Search for something.' />;
     }
