@@ -8,7 +8,7 @@ export function generateMetadata({ params: { term, id } }: ModalParameters): Met
     return { title: `Photo: ` + id };
 }
 
-export default function SelectedPhoto({ params: { term, id } }: ModalParameters): React.ReactNode | void {
+export default function PhotoPage({ params: { term, id } }: ModalParameters): React.ReactNode | void {
     return (
         <div className='flex w-full h-full items-center justify-center content-center'>
             <Suspense fallback={<ModalPlaceholder />}>
