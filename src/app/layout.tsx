@@ -16,11 +16,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }): ReactNode {
     return (
         <html lang='en'>
-            <body className={`${inter.className}`}>
+            <body className={`${inter.className} flex-document`}>
                 <Providers>
                     <NavBar />
                     <main>{children}</main>
-                    {/* <Paginator /> */}
+                    <Paginator />
                 </Providers>
             </body>
         </html>
