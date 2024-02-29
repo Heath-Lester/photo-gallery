@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import Providers from './providers';
 import NavBar from '@/components/NavBar';
 import './globals.css';
+import Paginator from '@/components/Paginator';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,10 +16,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }): ReactNode {
     return (
         <html lang='en'>
-            <body className={inter.className}>
+            <body className={`${inter.className} flex-document`}>
                 <Providers>
                     <NavBar />
                     <main>{children}</main>
+                    <Paginator />
                 </Providers>
             </body>
         </html>

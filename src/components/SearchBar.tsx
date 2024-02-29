@@ -15,14 +15,16 @@ import { FormEvent, ReactNode, useEffect, useMemo, useState } from 'react';
 import ClientComponentPlaceholder from './ClientComponentPlaceholder';
 
 export default function SearchBar(): ReactNode | undefined {
-    const [mounted, setMounted] = useState(false);
-    const [searchTypes, setSearchTypes] = useState<Set<UnsplashSearchTypes>>(new Set([UnsplashSearchTypes.KEYWORD]));
-    const [term, setTerm] = useState('');
+    const [mounted, setMounted] = useState<boolean>(false);
+    const [searchTypeSelection, setSearchTypeSelection] = useState<Set<string>>(
+        new Set([UnsplashSearchTypes.KEYWORD.valueOf()]),
+    );
+    const [term, setTerm] = useState<string>('');
     const router = useRouter();
 
-    const selectedSearchType: string = useMemo(
-        () => Array.from(searchTypes).join(', ').replaceAll('_', ' '),
-        [searchTypes],
+    const selectedSearchType: string | undefined = useMemo(
+        () => Array.from(searchTypeSelection).at(0),
+        [searchTypeSelection],
     );
 
     const handleSubmit = (event: FormEvent<HTMLFormElement | HTMLInputElement>): void => {
@@ -37,6 +39,7 @@ export default function SearchBar(): ReactNode | undefined {
 
     useEffect((): void => {
         setMounted(true);
+        setSearchTypeSelection(new Set([UnsplashSearchTypes.KEYWORD.valueOf()]));
     }, []);
 
     if (!mounted) {
@@ -62,11 +65,10 @@ export default function SearchBar(): ReactNode | undefined {
                             disallowEmptySelection
                             selectionMode='single'
                             disabledKeys={[UnsplashSearchTypes.LIST.valueOf(), UnsplashSearchTypes.TOPIC.valueOf()]}
-                            selectedKeys={selectedSearchType}
+                            selectedKeys={searchTypeSelection}
                             onSelectionChange={(keys: Selection) => {
-                                setSearchTypes(keys as Set<UnsplashSearchTypes>);
+                                setSearchTypeSelection(keys as Set<UnsplashSearchTypes>);
                                 setTerm('');
-                                return;
                             }}
                         >
                             <DropdownSection title='Select a search method'>

@@ -37,11 +37,15 @@ const config: Config = {
             themes: {
                 light: {
                     layout: {},
-                    colors: {},
+                    colors: {
+                        primary: 'gray',
+                    },
                 },
                 dark: {
                     layout: {},
-                    colors: {},
+                    colors: {
+                        primary: 'gray',
+                    },
                 },
             },
         }),
