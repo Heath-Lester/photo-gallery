@@ -36,7 +36,7 @@ export default function Paginator(): ReactNode {
                 className={`flex flex-col sticky sm:flex-row py-4 px-5 sm:gap-0 gap-4 min-h-[65px] w-full bottom-0 z-20 align-top justify-center sm:justify-between bg-background border-solid border-t-small`}
             >
                 <div className='w-20 sm:block hidden'></div>
-                <div className='pt-1'>
+                <div className='flex pt-1 justify-center'>
                     <Pagination
                         className='fade-in-moderate justify-center align-middle py-auto'
                         variant='faded'

@@ -18,8 +18,8 @@ const config: Config = {
                 gallery: 'repeat(auto-fit, minmax(260px, 1fr))',
             },
             minHeight: {
-                lgv: 'calc(100vh - 8.4em)',
-                smv: 'calc(100vh - 14.4em)',
+                lgv: 'calc(100vh - 8.6em)',
+                smv: 'calc(100vh - 14.6em)',
             },
             screens: {},
         },
