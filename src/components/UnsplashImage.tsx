@@ -39,11 +39,11 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
 
         const landscapeView: ReactElement = (
             <div className='flex flex-col gap-4 p-4 rounded-lg shadow-2xl w-[80vw]'>
-                <div
-                    className='flex flex-row font-semibold justify-between gap-4 w-36 p-4 shadow-md rounded-lg'
-                    style={{ height: 316! }}
-                >
-                    <div className='flex flex-col overflow-y-auto p-4 gap-2 rounded-lg shadow-inner'>
+                <div className='flex flex-col-reverse md:flex-row font-semibold justify-between gap-4 w-36 p-4 shadow-md rounded-lg'>
+                    <div
+                        className='flex flex-col overflow-y-auto p-4 gap-2 rounded-lg shadow-inner'
+                        style={{ height: 316! }}
+                    >
                         <UnsplashImageDetail title='Name' content={image.user.name} />
                         <UnsplashImageDetail title='Instagram' content={image.user.instagram_username} />
                         <UnsplashImageDetail title='Location' content={image.user.location} />
@@ -72,6 +72,6 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
 
         console.warn('HEIGHT TO WIDTH RATIO: ', heightWidthRatio);
 
-        return heightWidthRatio <= 1.8 ? verticalView : landscapeView;
+        return heightWidthRatio <= 1.7 ? verticalView : landscapeView;
     }
 }
