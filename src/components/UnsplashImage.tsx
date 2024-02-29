@@ -8,9 +8,7 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
     const image: Full | void = await UnsplashProvider.fetchPhotoByIdWithoutBlur(id);
 
     if (image) {
-        // const originalImageClassName: string = `rounded-2xl shadow-md max-h-[80vh] max-w[80vw] h-[calc(80vh * ${heightWidthRatio}) - 192px] w-[calc(80vw * ${widthHeightRatio}) - 192px]`;
         const verticalView: ReactElement = (
-            // <div className='flex flex-col md:flex-row-reverse gap-4 p-4 max-h-[80vh] max-w-[80vw] rounded-lg shadow-2xl'>
             <div className='flex flex-col lg:flex-row-reverse gap-4 p-4 rounded-lg shadow-2xl w-min'>
                 <div className='flex flex-col text-small font-semibold gap-4 p-4 shadow-md rounded-lg'>
                     <Image
@@ -23,6 +21,7 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                     />
                     <div className='flex flex-col overflow-y-auto p-4 gap-2 rounded-lg shadow-inner h-60 lg:h-full min-w-70 w-auto lg:w-72'>
                         <UnsplashImageDetail title='Name' content={image.user.name} />
+                        <UnsplashImageDetail title='Unsplash Username' content={image.user.username} />
                         <UnsplashImageDetail title='Instagram' content={image.user.instagram_username} />
                         <UnsplashImageDetail title='Location' content={image.user.location} />
                         <UnsplashImageDetail title='Bio' content={image.user.bio} />
@@ -46,6 +45,7 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                         style={{ height: 316! }}
                     >
                         <UnsplashImageDetail title='Name' content={image.user.name} />
+                        <UnsplashImageDetail title='Unsplash Username' content={image.user.username} />
                         <UnsplashImageDetail title='Instagram' content={image.user.instagram_username} />
                         <UnsplashImageDetail title='Location' content={image.user.location} />
                         <UnsplashImageDetail title='Bio' content={image.user.bio} />
@@ -70,8 +70,6 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
         );
 
         const heightWidthRatio: number = image.width / image.height;
-
-        console.warn('HEIGHT TO WIDTH RATIO: ', heightWidthRatio);
 
         return heightWidthRatio <= 1.7 ? verticalView : landscapeView;
     }

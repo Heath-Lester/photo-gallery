@@ -37,7 +37,6 @@ export default function SearchBar(): ReactNode | undefined {
 
     useEffect((): void => {
         setMounted(true);
-        setSearchTypes(new Set([UnsplashSearchTypes.KEYWORD]));
     }, []);
 
     if (!mounted) {

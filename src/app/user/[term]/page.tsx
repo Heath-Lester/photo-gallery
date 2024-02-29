@@ -14,7 +14,7 @@ export default function keywordSearch({ params: { term } }: SearchParameters): R
         <Suspense fallback={<GalleryPlaceholder displayText='Loading...' />}>
             <UnsplashGallery
                 searchParams={{
-                    searchType: UnsplashSearchTypes.KEYWORD,
+                    searchType: UnsplashSearchTypes.USER,
                     term: decodeURI(term),
                 }}
             />
