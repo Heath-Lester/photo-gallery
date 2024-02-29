@@ -16,7 +16,7 @@ export class UnsplashProvider {
     private static readonly defaultPageNumber: number = 1;
     private static readonly defaultPageSize: number = 10;
     private static readonly fetchOptions: AdditionalFetchOptions = {
-        cache: 'no-store',
+        // cache: 'no-store',
     };
     private static readonly unsplash = createApi({
         accessKey: env.UNSPLASH_ACCESS_KEY,

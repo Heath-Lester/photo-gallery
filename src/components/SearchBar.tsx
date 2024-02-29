@@ -79,6 +79,7 @@ export default function SearchBar(): ReactNode | undefined {
                     </Dropdown>
                     <input
                         type='text'
+                        name='search-input'
                         autoFocus
                         value={term}
                         onChange={(event) => setTerm(event.currentTarget.value)}
