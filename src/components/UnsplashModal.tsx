@@ -7,10 +7,15 @@ import ModalPlaceholder from './ModalPlaceholder';
 export default function UnsplashModal({ children }: { children: React.ReactNode }): React.ReactNode {
     const [mounted, setMounted] = useState(false);
     const router = useRouter();
-    const handleClose = (): void => router.back();
+    const main: HTMLElement | null = document.getElementById('view-port');
+    const handleClose = (): void => {
+        if (main) main.style.overflow = 'auto';
+        router.back();
+    };
 
     useEffect(() => {
         setMounted(true);
+        if (main) main.style.overflow = 'hidden';
     }, []);
 
     if (!mounted) {
