@@ -3,23 +3,17 @@
 @tailwind utilities;
 
 .view-span {
-    min-height: calc(calc(100vh) - 130px);
+    min-height: calc(100vh - 8.3em);
+    overflow-y: auto;
 }
 
 .flex-document {
     display: flex;
-    > div {
+    div:first-child {
         display: flex;
         flex-direction: column;
         width: 100vw;
         height: calc(100vh - 2px);
-        > main {
-            display: flex;
-            height: 100%;
-            width: 100%;
-            justify-content: center;
-            overflow-y: auto;
-        }
     }
 }
 

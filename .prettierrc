@@ -1,6 +1,6 @@
 {
     "singleQuote": true,
-    "quoteProps": "consistent",
+    "quoteProps": "as-needed",
     "jsxSingleQuote": true,
     "tabWidth": 4,
     "printWidth": 120

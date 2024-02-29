@@ -25,7 +25,7 @@ export default async function UnsplashGallery({
         return <GalleryPlaceholder displayText='No results. Try searching for something else.' />;
     } else {
         return (
-            <section className='justify-center w-full grid mx-auto px-4 pt-5 grid-cols-gallery auto-rows-[10px]'>
+            <section className='justify-center w-full grid mx-auto px-4 pt-5 pb-8 grid-cols-gallery auto-rows-[10px]'>
                 {response.results.map((photo: Basic) => (
                     <UnsplashCard
                         key={photo.id}
