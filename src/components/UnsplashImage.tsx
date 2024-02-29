@@ -10,7 +10,7 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
     if (image) {
         // const originalImageClassName: string = `rounded-2xl shadow-md max-h-[80vh] max-w[80vw] h-[calc(80vh * ${heightWidthRatio}) - 192px] w-[calc(80vw * ${widthHeightRatio}) - 192px]`;
         const verticalView: ReactElement = (
-            <div className='flex flex-col-reverse md:flex-row gap-4 p-4 h-[80vh] max-w-[80vw] rounded-lg shadow-2xl'>
+            <div className='flex flex-row gap-4 p-4 h-[80vh] max-w-[80vw] rounded-lg shadow-2xl'>
                 <img
                     title='vertical'
                     alt={image.alt_description ?? 'description'}
