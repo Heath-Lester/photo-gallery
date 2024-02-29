@@ -2,21 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.view-span {
-    min-height: calc(100vh - 8.3em);
-    overflow-y: auto;
-}
-
-.flex-document {
-    display: flex;
-    div:first-child {
-        display: flex;
-        flex-direction: column;
-        width: 100vw;
-        height: calc(100vh - 2px);
-    }
-}
-
 .fade-in-slow {
     animation: fadeIn 6s;
     -webkit-animation: fadeIn 6s;

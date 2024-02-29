@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }): React
             <body className={`${inter.className}`}>
                 <Providers>
                     <NavBar />
-                    <main className='view-span'>{children}</main>
+                    <main className='flex min-h-smv sm:min-h-lgv justify-center overflow-y-auto'>{children}</main>
                     <Paginator />
                 </Providers>
             </body>

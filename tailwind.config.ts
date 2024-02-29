@@ -17,6 +17,11 @@ const config: Config = {
             gridTemplateColumns: {
                 gallery: 'repeat(auto-fit, minmax(260px, 1fr))',
             },
+            minHeight: {
+                lgv: 'calc(100vh - 8.4em)',
+                smv: 'calc(100vh - 14.4em)',
+            },
+            screens: {},
         },
     },
     darkMode: 'class',
