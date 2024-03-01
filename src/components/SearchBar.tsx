@@ -105,13 +105,13 @@ export default function SearchBar({
             } else {
                 setPageNumber(1);
             }
+        }
 
-            // If at root reset input string
-            if (!searchType || !term) {
-                setTerm('');
-            } else {
-                setTerm(decodeURI(term));
-            }
+        // If at root reset input string
+        if (!searchType || searchType.length === 0 || !term) {
+            setTerm('');
+        } else {
+            setTerm(decodeURI(term));
         }
     }, [pathname]);
 

@@ -14,7 +14,7 @@ export default function PagingBar({
 }: PaginationParams): ReactNode {
     return (
         <footer
-            className={`flex flex-col sticky sm:flex-row py-2 px-5 gap-3 min-h-[65px] w-full bottom-0 z-20 align-top justify-center sm:justify-between bg-background border-solid border-t-small`}
+            className={`flex flex-col sticky sm:flex-row py-3 px-5 gap-3 min-h-[65px] w-full bottom-0 z-20 align-top justify-center sm:justify-between bg-background border-solid border-t-small`}
         >
             <div className='w-20 sm:block hidden'></div>
             <Suspense fallback={<ClientComponentPlaceholder />}>

@@ -29,7 +29,7 @@ export default function Paginator({
 
     if (mounted) {
         return (
-            <div className='flex pt-1 justify-center gap-4'>
+            <div className='flex justify-center self-center gap-4 h-min'>
                 <>
                     <Tooltip content='Previous page' delay={800} placement='top' className='text-tiny'>
                         <Button
