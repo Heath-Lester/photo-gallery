@@ -47,7 +47,7 @@ export default function PageSizer({
             <div className='flex justify-center fade-in-moderate'>
                 <Dropdown size='sm'>
                     <DropdownTrigger>
-                        <Button name='pageSize' size='md' radius='lg' variant='ghost' className='px-4'>
+                        <Button name='pageSize' size='sm' radius='lg' variant='ghost' className='px-4 self-center'>
                             {selectedPageSize}
                         </Button>
                     </DropdownTrigger>

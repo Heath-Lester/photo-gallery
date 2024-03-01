@@ -31,18 +31,20 @@ export default function Paginator({
         return (
             <div className='flex pt-1 justify-center gap-4'>
                 <>
-                    <Button
-                        isIconOnly
-                        radius='lg'
-                        size='sm'
-                        variant='faded'
-                        aria-label='previous page'
-                        onClick={decrementPage}
-                        isDisabled={pageNumber < 2}
-                        className='fade-in-moderate'
-                    >
-                        <FaChevronLeft />
-                    </Button>
+                    <Tooltip content='Previous page' delay={800} placement='top' className='text-tiny'>
+                        <Button
+                            isIconOnly
+                            radius='lg'
+                            size='sm'
+                            variant='faded'
+                            aria-label='previous page'
+                            onClick={decrementPage}
+                            isDisabled={pageNumber < 2}
+                            className='fade-in-moderate'
+                        >
+                            <FaChevronLeft />
+                        </Button>
+                    </Tooltip>
                     <Tooltip content='Page number' delay={800} placement='top' className='text-tiny'>
                         <Button
                             isIconOnly
@@ -51,23 +53,25 @@ export default function Paginator({
                             disableAnimation={true}
                             disableRipple={true}
                             variant='bordered'
-                            className='fade-in-moderate'
+                            className='fade-in-moderate cursor-default'
                         >
                             {pageNumber}
                         </Button>
                     </Tooltip>
-                    <Button
-                        isIconOnly
-                        radius='lg'
-                        size='sm'
-                        variant='faded'
-                        aria-label='next page'
-                        onClick={incrementPage}
-                        isDisabled={pageNumber < 1}
-                        className='fade-in-moderate'
-                    >
-                        <FaChevronRight />
-                    </Button>
+                    <Tooltip content='Next page' delay={800} placement='top' className='text-tiny'>
+                        <Button
+                            isIconOnly
+                            radius='lg'
+                            size='sm'
+                            variant='faded'
+                            aria-label='next page'
+                            onClick={incrementPage}
+                            isDisabled={pageNumber < 1}
+                            className='fade-in-moderate'
+                        >
+                            <FaChevronRight />
+                        </Button>
+                    </Tooltip>
                 </>
             </div>
         );

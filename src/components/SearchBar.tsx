@@ -11,7 +11,7 @@ import {
     Selection,
 } from '@nextui-org/react';
 import { usePathname, useRouter } from 'next/navigation';
-import { Key, ReactNode, useEffect, useMemo, useState, FormEvent } from 'react';
+import { Key, ReactNode, useEffect, useMemo, useState, FormEvent, KeyboardEvent } from 'react';
 import ClientComponentPlaceholder from './ClientComponentPlaceholder';
 import { NavigationParams } from '@/types/navigationParameters';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
@@ -67,7 +67,18 @@ export default function SearchBar({
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
-        setPageNumber(1);
+        if (pageNumber === 1) {
+            navigate();
+        } else {
+            setPageNumber(1);
+        }
+    };
+
+    const handleEnter = (event: KeyboardEvent<HTMLInputElement>): void => {
+        event.preventDefault();
+        if (event.key === 'Enter') {
+            event.currentTarget.blur();
+        }
     };
 
     useEffect(() => {
@@ -78,27 +89,36 @@ export default function SearchBar({
         navigate();
     }, [selectedPageSize]);
 
+    // Handle url insertion
     useEffect(() => {
         const [base, searchType, term, pageNumber] = pathname.split('/');
         if (pageNumber) {
             const inputPageNumber: number = Number(pageNumber);
-            const inputSearchType: string | undefined = Object.values(UnsplashSearchTypes).find(
+            const matchingSearchType: string | undefined = Object.values(UnsplashSearchTypes).find(
                 (value: string) => value.toLowerCase === searchType.toLowerCase,
             );
 
-            if (inputSearchType) {
-                setSearchTypeSelection(new Set([searchType]));
+            if (matchingSearchType) {
+                setSearchTypeSelection(new Set([matchingSearchType]));
             }
 
+            // Set the number from the url so pagination can be accurate
             if (!isNaN(inputPageNumber)) {
                 if (inputPageNumber > 1000 || inputPageNumber < 0) {
                     setPageNumber(1);
                 } else {
                     setPageNumber(Math.round(inputPageNumber));
                 }
+            } else {
+                setPageNumber(1);
             }
 
-            setTerm(term);
+            // If at root reset input string
+            if (!searchType) {
+                setTerm('');
+            } else {
+                setTerm(term);
+            }
         }
     }, [pathname]);
 
@@ -152,7 +172,7 @@ export default function SearchBar({
                         autoFocus={true}
                         value={term}
                         onChange={(event) => setTerm(event.currentTarget.value)}
-                        onKeyUp={(event) => (event.key === 'Enter' ? event.currentTarget.blur() : null)}
+                        onKeyUp={handleEnter}
                         placeholder='Press enter to search'
                         className='text-tiny rounded-l-none rounded-r-md w-full px-2 min-w-32'
                     ></input>
