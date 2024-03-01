@@ -10,7 +10,7 @@ import {
     DropdownTrigger,
     Selection,
 } from '@nextui-org/react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Key, ReactNode, useEffect, useMemo, useState, FormEvent } from 'react';
 import ClientComponentPlaceholder from './ClientComponentPlaceholder';
 import { NavigationParams } from '@/types/navigationParameters';
@@ -28,6 +28,7 @@ export default function SearchBar({
     );
     const [term, setTerm] = useState<string>('');
     const router: AppRouterInstance = useRouter();
+    const pathname = usePathname();
 
     const selectedSearchType: string | undefined = useMemo(() => {
         const selectedType: Key | undefined = Array.from(searchTypeSelection).at(0);
@@ -38,7 +39,6 @@ export default function SearchBar({
 
     const selectedPageSize: string | undefined = useMemo(() => {
         const selection: Key | undefined = Array.from(pageSizeSelection).at(0);
-        console.log('PAGE SIZER: PAGE SIZE SELECTED: ', { pageSizeSelection, selection });
         if (typeof selection === 'string') {
             return selection;
         }
@@ -77,6 +77,30 @@ export default function SearchBar({
     useEffect(() => {
         navigate();
     }, [selectedPageSize]);
+
+    useEffect(() => {
+        const [base, searchType, term, pageNumber] = pathname.split('/');
+        if (pageNumber) {
+            const inputPageNumber: number = Number(pageNumber);
+            const inputSearchType: string | undefined = Object.values(UnsplashSearchTypes).find(
+                (value: string) => value.toLowerCase === searchType.toLowerCase,
+            );
+
+            if (inputSearchType) {
+                setSearchTypeSelection(new Set([searchType]));
+            }
+
+            if (!isNaN(inputPageNumber)) {
+                if (inputPageNumber > 1000 || inputPageNumber < 0) {
+                    setPageNumber(1);
+                } else {
+                    setPageNumber(Math.round(inputPageNumber));
+                }
+            }
+
+            setTerm(term);
+        }
+    }, [pathname]);
 
     useEffect(() => {
         setMounted(true);

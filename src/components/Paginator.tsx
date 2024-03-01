@@ -2,7 +2,6 @@
 
 import { PaginatorParams } from '@/types/paginatorParameters';
 import { Button, Tooltip } from '@nextui-org/react';
-import { usePathname } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
@@ -12,8 +11,6 @@ export default function Paginator({
     numberOfPages,
 }: PaginatorParams): ReactNode | undefined {
     const [mounted, setMounted] = useState<boolean>(false);
-    const [disablePagination, setDisablePagination] = useState<boolean>(true);
-    const pathname = usePathname();
 
     const incrementPage = (): void => {
         if (pageNumber !== undefined) {
@@ -25,10 +22,6 @@ export default function Paginator({
             setPageNumber(pageNumber - 1);
         }
     };
-
-    useEffect(() => {
-        setDisablePagination(pathname === '/');
-    }, [pathname]);
 
     useEffect(() => {
         setMounted(true);
@@ -45,7 +38,7 @@ export default function Paginator({
                         variant='faded'
                         aria-label='previous page'
                         onClick={decrementPage}
-                        isDisabled={disablePagination || pageNumber < 2}
+                        isDisabled={pageNumber < 2}
                         className='fade-in-moderate'
                     >
                         <FaChevronLeft />
@@ -70,7 +63,7 @@ export default function Paginator({
                         variant='faded'
                         aria-label='next page'
                         onClick={incrementPage}
-                        isDisabled={disablePagination || pageNumber < 1}
+                        isDisabled={pageNumber < 1}
                         className='fade-in-moderate'
                     >
                         <FaChevronRight />
