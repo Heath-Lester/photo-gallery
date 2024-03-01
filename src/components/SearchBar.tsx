@@ -46,20 +46,13 @@ export default function SearchBar({
 
     const navigate = (): void => {
         if (
-            !selectedSearchType ||
-            !term ||
-            pageNumber === 0 ||
-            term.length === 0 ||
-            !selectedPageSize ||
-            selectedPageSize.length === 0
+            selectedSearchType &&
+            term &&
+            pageNumber > 0 &&
+            term.length > 0 &&
+            selectedPageSize &&
+            selectedPageSize.length > 0
         ) {
-            console.warn('All search parameters are not truthy or valid', {
-                selectedSearchType,
-                term,
-                pageNumber,
-                pageSizeSelection,
-            });
-        } else {
             const newRoute: string = `/${selectedSearchType.toLowerCase()}/${term}/${pageNumber}/${selectedPageSize}`;
             router.push(newRoute);
         }
