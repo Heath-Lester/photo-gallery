@@ -19,7 +19,7 @@ const config: Config = {
             },
             minHeight: {
                 lgv: 'calc(100vh - 8.6em)',
-                smv: 'calc(100vh - 14.6em)',
+                smv: 'calc(100vh - 12.9em)',
             },
             screens: {},
         },

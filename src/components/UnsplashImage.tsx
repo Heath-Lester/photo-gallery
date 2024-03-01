@@ -17,9 +17,9 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                         width={144}
                         height={144}
                         sizes='144px'
-                        className='rounded-full self-center shadow-inner'
+                        className='rounded-full self-center shadow-inner h-auto w-auto'
                     />
-                    <div className='flex flex-col overflow-y-auto p-4 gap-2 rounded-lg shadow-inner max-h-60 h-min xl:h-full min-w-70 w-auto xl:w-72'>
+                    <div className='flex flex-col overflow-y-auto p-4 gap-2 rounded-lg shadow-inner max-h-[10vh] h-min xl:max-h-[unset] min-w-70 w-auto xl:w-72'>
                         <UnsplashImageDetail title='Name' content={image.user.name} />
                         <UnsplashImageDetail title='Unsplash Username' content={image.user.username} />
                         <UnsplashImageDetail title='Instagram' content={image.user.instagram_username} />

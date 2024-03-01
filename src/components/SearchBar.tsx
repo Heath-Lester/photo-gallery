@@ -107,10 +107,10 @@ export default function SearchBar({
             }
 
             // If at root reset input string
-            if (!searchType) {
+            if (!searchType || !term) {
                 setTerm('');
             } else {
-                setTerm(term);
+                setTerm(decodeURI(term));
             }
         }
     }, [pathname]);
