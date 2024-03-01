@@ -32,7 +32,7 @@ export default function UnsplashCard({ photo, pathname }: { photo: Basic; pathna
                     loading='lazy'
                     decoding='async'
                     data-nimg='fill'
-                    className='object-cover group-hover:opacity-50 duration-700 z-10'
+                    className='object-cover h-auto w-auto group-hover:opacity-50 duration-700 z-10'
                     sizes='250px'
                 />
                 <div className='to-overlay self-center absolute'>{photo.user.username}</div>
