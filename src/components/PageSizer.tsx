@@ -28,6 +28,10 @@ export default function PageSizer({
             const matchingPageSize: string | undefined = pageSizes.find((size: string) => size === pageSize);
             if (matchingPageSize) {
                 setPageSizeSelection(new Set([matchingPageSize]));
+            } else if (pageSizeNumber > 30) {
+                setPageSizeSelection(new Set(['30']));
+            } else if (pageSizeNumber < 5) {
+                setPageSizeSelection(new Set(['5']));
             } else {
                 const pageSizeNumbers: number[] = pageSizes.map((size: string) => Number(size));
                 const closest: number = pageSizeNumbers.reduce((previous, current) =>

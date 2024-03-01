@@ -6,7 +6,7 @@ import NavBar from './NavBar';
 import PagingBar from './PagingBar';
 
 export default function NavContainer({ children }: { children: ReactNode }): ReactNode {
-    const pageSizes = new Array<string>('5', '10', '25', '50', '75', '100');
+    const pageSizes = new Array<string>('5', '10', '15', '20', '25', '30');
     const [mounted, setMounted] = useState<boolean>(false);
     const [pageNumber, setPageNumber] = useState<number>(0);
     const [pageSizeSelection, setPageSizeSelection] = useState<Selection>(new Set([pageSizes[1]]));
