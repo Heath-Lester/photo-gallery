@@ -20,8 +20,8 @@ export default async function UnsplashGallery({
     } = await UnsplashProvider.fetchBySearchParams(searchParams);
 
     if (!response) {
-        return <GalleryPlaceholder displayText='There was an issue while retrieving images' />;
-    } else if (!response || !response.results || response.total === 0) {
+        return <GalleryPlaceholder displayText='There was an issue while retrieving images.' />;
+    } else if (!response || !response.results || response.total === 0 || response.results.length === 0) {
         return <GalleryPlaceholder displayText='No results. Try searching for something else.' />;
     } else {
         return (
