@@ -1,7 +1,7 @@
 import { UnsplashSearchParams } from '@/types/unsplashSearchParams';
 import { UnsplashProvider } from '@/providers/unsplashProvider';
 import { ReactElement } from 'react';
-import { Basic } from 'unsplash-js/dist/methods/photos/types';
+import { Basic, Random } from 'unsplash-js/dist/methods/photos/types';
 import GalleryPlaceholder from './GalleryPlaceholder';
 import UnsplashCard from './UnsplashCard';
 
@@ -10,12 +10,12 @@ export default async function UnsplashGallery({
 }: {
     searchParams: UnsplashSearchParams;
 }): Promise<ReactElement> {
-    if (!searchParams.term || searchParams.term.length === 0) {
+    if (!searchParams.params.term || searchParams.params.term.length === 0) {
         return <GalleryPlaceholder displayText='Search for something.' />;
     }
 
     const response: void | {
-        results: Basic[];
+        results: Basic[] | Random[];
         total: number;
     } = await UnsplashProvider.fetchBySearchParams(searchParams);
 
@@ -30,7 +30,15 @@ export default async function UnsplashGallery({
                     <UnsplashCard
                         key={photo.id}
                         photo={photo}
-                        pathname={`${searchParams.searchType.toLowerCase()}/${searchParams.term}`}
+                        pathname={
+                            searchParams.searchType.toLowerCase() +
+                            '/' +
+                            searchParams.params.term +
+                            '/' +
+                            searchParams.params.pageNumber +
+                            '/' +
+                            searchParams.params.pageSize
+                        }
                     />
                 ))}
             </section>

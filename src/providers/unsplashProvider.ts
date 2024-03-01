@@ -11,12 +11,15 @@ import { Basic, Full, Random } from 'unsplash-js/dist/methods/photos/types';
 import { createApi } from 'unsplash-js';
 import * as nodeFetch from 'node-fetch';
 import env from '@/env/env';
-
+/**
+ * Provider class for fetching images from the Unsplash API
+ * {@link https://unsplash.com/developers}
+ */
 export class UnsplashProvider {
     private static readonly defaultPageNumber: number = 1;
     private static readonly defaultPageSize: number = 10;
     private static readonly fetchOptions: AdditionalFetchOptions = {
-        // cache: 'no-store',
+        cache: 'no-store',
     };
     private static readonly unsplash = createApi({
         accessKey: env.UNSPLASH_ACCESS_KEY,
@@ -25,19 +28,34 @@ export class UnsplashProvider {
 
     public static async fetchBySearchParams(
         searchParams: UnsplashSearchParams,
-    ): Promise<void | { results: Basic[]; total: number }> {
+    ): Promise<void | { results: Basic[] | Random[]; total: number }> {
         switch (searchParams.searchType) {
             case UnsplashSearchTypes.KEYWORD: {
-                return this.fetchPhotosBySearch(searchParams.term);
+                return this.fetchPhotosBySearch(
+                    searchParams.params.term,
+                    searchParams.params.pageNumber,
+                    searchParams.params.pageSize,
+                );
             }
             case UnsplashSearchTypes.TOPIC: {
-                return this.fetchPhotosByTopic(searchParams.term);
+                return this.fetchPhotosByTopic(
+                    searchParams.params.term,
+                    searchParams.params.pageNumber,
+                    searchParams.params.pageSize,
+                );
             }
             case UnsplashSearchTypes.USER: {
-                return this.fetchPhotosByUser(searchParams.term);
+                return this.fetchPhotosByUser(
+                    searchParams.params.term,
+                    searchParams.params.pageNumber,
+                    searchParams.params.pageSize,
+                );
             }
             case UnsplashSearchTypes.LIST: {
-                return this.fetchPhotos();
+                return this.fetchPhotos(searchParams.params.pageNumber, searchParams.params.pageSize);
+            }
+            case UnsplashSearchTypes.RANDOM: {
+                return this.fetchRandomPhotos(searchParams.params.pageNumber, searchParams.params.pageSize);
             }
             default: {
                 throw Error('Unhandled search type: ', searchParams.searchType);
@@ -114,7 +132,10 @@ export class UnsplashProvider {
             });
     }
 
-    public static async fetchRandomPhotos(page?: number | null, perPage?: number | null): Promise<void | Random[]> {
+    public static async fetchRandomPhotos(
+        page?: number | null,
+        perPage?: number | null,
+    ): Promise<void | { results: Random[]; total: number }> {
         return await this.unsplash.photos
             .getRandom(
                 {
@@ -127,7 +148,10 @@ export class UnsplashProvider {
                 return response as ApiResponse<Random[]>;
             })
             .then((response: ApiResponse<Random[]>) => addBlurHashToUnsplashRandomImages(response))
-            .then((response: ApiResponse<Random[]>) => response.response)
+            .then((response: ApiResponse<Random[]>) => {
+                results: response.response ?? [];
+                total: response.response?.length ?? 0;
+            })
             .catch((err) => {
                 console.error('Failed to fetch images by topic', err);
             });

@@ -11,43 +11,83 @@ import {
     Selection,
 } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
-import { FormEvent, ReactNode, useEffect, useMemo, useState } from 'react';
+import { Key, ReactNode, useEffect, useMemo, useState, FormEvent } from 'react';
 import ClientComponentPlaceholder from './ClientComponentPlaceholder';
+import { NavigationParams } from '@/types/navigationParameters';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
-export default function SearchBar(): ReactNode | undefined {
+export default function SearchBar({
+    pageNumber,
+    setPageNumber,
+    pageSizeSelection,
+    setNumberOfPages,
+}: NavigationParams): ReactNode | undefined {
     const [mounted, setMounted] = useState<boolean>(false);
-    const [searchTypeSelection, setSearchTypeSelection] = useState<Set<string>>(
+    const [searchTypeSelection, setSearchTypeSelection] = useState<Selection>(
         new Set([UnsplashSearchTypes.KEYWORD.valueOf()]),
     );
     const [term, setTerm] = useState<string>('');
-    const router = useRouter();
+    const router: AppRouterInstance = useRouter();
 
-    const selectedSearchType: string | undefined = useMemo(
-        () => Array.from(searchTypeSelection).at(0),
-        [searchTypeSelection],
-    );
-
-    const handleSubmit = (event: FormEvent<HTMLFormElement | HTMLInputElement>): void => {
-        event.preventDefault();
-        if (!selectedSearchType) {
-            throw Error(`The current search method is ${selectedSearchType}`);
+    const selectedSearchType: string | undefined = useMemo(() => {
+        const selectedType: Key | undefined = Array.from(searchTypeSelection).at(0);
+        if (typeof selectedType === 'string') {
+            return selectedType;
         }
-        event.currentTarget.blur();
-        const newRoute: string = `/${selectedSearchType.toLowerCase()}/${term}`;
-        router.push(newRoute);
+    }, [searchTypeSelection]);
+
+    const selectedPageSize: string | undefined = useMemo(() => {
+        const selection: Key | undefined = Array.from(pageSizeSelection).at(0);
+        console.log('PAGE SIZER: PAGE SIZE SELECTED: ', { pageSizeSelection, selection });
+        if (typeof selection === 'string') {
+            return selection;
+        }
+    }, [pageSizeSelection]);
+
+    const navigate = (): void => {
+        if (
+            !selectedSearchType ||
+            !term ||
+            pageNumber === 0 ||
+            term.length === 0 ||
+            !selectedPageSize ||
+            selectedPageSize.length === 0
+        ) {
+            console.warn('All search parameters are not truthy or valid', {
+                selectedSearchType,
+                term,
+                pageNumber,
+                pageSizeSelection,
+            });
+        } else {
+            const newRoute: string = `/${selectedSearchType.toLowerCase()}/${term}/${pageNumber}/${selectedPageSize}`;
+            router.push(newRoute);
+        }
     };
 
-    useEffect((): void => {
+    const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+        event.preventDefault();
+        setPageNumber(1);
+    };
+
+    useEffect(() => {
+        navigate();
+    }, [pageNumber]);
+
+    useEffect(() => {
+        navigate();
+    }, [selectedPageSize]);
+
+    useEffect(() => {
         setMounted(true);
-        setSearchTypeSelection(new Set([UnsplashSearchTypes.KEYWORD.valueOf()]));
     }, []);
 
     if (!mounted) {
         return <ClientComponentPlaceholder />;
     } else {
         return (
-            <search className='flex flex-row max-w-screen-sm w-full items-center fade-in-fast'>
-                <form onSubmit={handleSubmit} className='flex w-full h-8'>
+            <search onSubmit={handleSubmit} className='flex flex-row max-w-screen-sm w-full items-center fade-in-fast'>
+                <form className='flex w-full h-8'>
                     <Dropdown size='sm'>
                         <DropdownTrigger>
                             <Button
@@ -62,26 +102,30 @@ export default function SearchBar(): ReactNode | undefined {
                         <DropdownMenu
                             aria-label='Search types'
                             variant='solid'
-                            disallowEmptySelection
+                            disallowEmptySelection={true}
                             selectionMode='single'
-                            disabledKeys={[UnsplashSearchTypes.LIST.valueOf(), UnsplashSearchTypes.TOPIC.valueOf()]}
+                            disabledKeys={[
+                                UnsplashSearchTypes.LIST.valueOf(),
+                                UnsplashSearchTypes.TOPIC.valueOf(),
+                                UnsplashSearchTypes.RANDOM.valueOf(),
+                            ]}
                             selectedKeys={searchTypeSelection}
                             onSelectionChange={(keys: Selection) => {
-                                setSearchTypeSelection(keys as Set<UnsplashSearchTypes>);
+                                setSearchTypeSelection(keys);
                                 setTerm('');
                             }}
                         >
                             <DropdownSection title='Select a search method'>
-                                {Object.values(UnsplashSearchTypes).map((type: string) => {
-                                    return <DropdownItem key={type}>{type}</DropdownItem>;
-                                })}
+                                {Object.values(UnsplashSearchTypes).map((type: string) => (
+                                    <DropdownItem key={type}>{type}</DropdownItem>
+                                ))}
                             </DropdownSection>
                         </DropdownMenu>
                     </Dropdown>
                     <input
                         type='text'
                         name='search-input'
-                        autoFocus
+                        autoFocus={true}
                         value={term}
                         onChange={(event) => setTerm(event.currentTarget.value)}
                         onKeyUp={(event) => (event.key === 'Enter' ? event.currentTarget.blur() : null)}

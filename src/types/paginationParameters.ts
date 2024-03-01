@@ -1,9 +1,6 @@
-import { Dispatch, SetStateAction } from 'react';
-
-export type paginationParameters = {
-    pageSize: number;
-    setPageSize: Dispatch<SetStateAction<number>>;
-    pageNumber: number;
-    setPageNumber: Dispatch<SetStateAction<number>>;
-    numberOfPages: number;
-};
+import { PaginatorParams } from './paginatorParameters';
+import { PageSizerParams } from './pageSizerParameters';
+/**
+ * Used by the paging bar to pass state handling to the paginator and page sizer
+ */
+export type PaginationParams = PaginatorParams & PageSizerParams;

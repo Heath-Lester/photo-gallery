@@ -1,21 +1,21 @@
 import { UnsplashSearchTypes } from '@/enums/unsplashSearchTypes';
 import { ReactNode, Suspense } from 'react';
-import { SearchParameters } from '@/types/searchParameters';
+import { SearchParams } from '@/types/searchParameters';
 import { Metadata } from 'next';
-import GalleryPlaceholder from '@/components/GalleryPlaceholder';
 import UnsplashGallery from '@/components/UnsplashGallery';
+import GallerySpinner from '@/components/GallerySpinner';
 
-export function generateMetadata({ params: { term } }: SearchParameters): Metadata {
+export function generateMetadata({ params: { term } }: SearchParams): Metadata {
     return { title: `Photo Gallery | ` + decodeURI(term) };
 }
 
-export default function keywordSearch({ params: { term } }: SearchParameters): ReactNode {
+export default function keywordSearch({ params: { term, pageNumber, pageSize } }: SearchParams): ReactNode {
     return (
-        <Suspense fallback={<GalleryPlaceholder displayText='Loading...' />}>
+        <Suspense fallback={<GallerySpinner />}>
             <UnsplashGallery
                 searchParams={{
                     searchType: UnsplashSearchTypes.USER,
-                    term: decodeURI(term),
+                    params: { term: decodeURI(term), pageNumber, pageSize },
                 }}
             />
         </Suspense>

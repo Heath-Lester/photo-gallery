@@ -2,9 +2,8 @@ import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
 import Providers from './providers';
-import Paginator from '@/components/Paginator';
-import NavBar from '@/components/NavBar';
 import './globals.css';
+import NavContainer from '@/components/NavContainer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,11 +17,11 @@ export default function RootLayout({ children }: { children: ReactNode }): React
         <html lang='en'>
             <body className={`${inter.className}`}>
                 <Providers>
-                    <NavBar />
-                    <main id='view-port' className='flex min-h-smv sm:min-h-lgv justify-center overflow-y-auto'>
-                        {children}
-                    </main>
-                    <Paginator />
+                    <NavContainer>
+                        <main id='view-port' className='flex min-h-smv sm:min-h-lgv justify-center overflow-y-auto'>
+                            {children}
+                        </main>
+                    </NavContainer>
                 </Providers>
             </body>
         </html>

@@ -1,14 +1,14 @@
-import { ModalParameters } from '@/types/modalParameters';
+import { ModalParams } from '@/types/modalParameters';
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
 import UnsplashModal from '@/components/UnsplashModal';
 import UnsplashImage from '@/components/UnsplashImage';
 
-export function generateMetadata({ params: { term, id } }: ModalParameters): Metadata {
+export function generateMetadata({ params: { term } }: ModalParams): Metadata {
     return { title: `Photo Gallery | ` + decodeURI(term) };
 }
 
-export default function InterceptingPhotoPage({ params: { term, id } }: ModalParameters): ReactNode {
+export default function InterceptingPhotoPage({ params: { id } }: ModalParams): ReactNode {
     return (
         <UnsplashModal>
             <UnsplashImage id={id} />

@@ -1,10 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { Suspense, useEffect, useState } from 'react';
+import { ReactNode, Suspense, useEffect, useState } from 'react';
 import ModalPlaceholder from './ModalPlaceholder';
 
-export default function UnsplashModal({ children }: { children: React.ReactNode }): React.ReactNode {
+export default function UnsplashModal({ children }: { children: ReactNode }): ReactNode {
     const [mounted, setMounted] = useState(false);
     const router = useRouter();
     const main: HTMLElement | null = document.getElementById('view-port');
