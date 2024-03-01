@@ -59,6 +59,7 @@ export default function SearchBar({
     };
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+        console.warn('HANDLE SUBMIT');
         event.preventDefault();
         if (pageNumber === 1) {
             navigate();
@@ -70,6 +71,7 @@ export default function SearchBar({
     const handleEnter = (event: KeyboardEvent<HTMLInputElement>): void => {
         event.preventDefault();
         if (event.key === 'Enter') {
+            console.warn('HANDLE ENTER');
             event.currentTarget.blur();
         }
     };
@@ -88,7 +90,7 @@ export default function SearchBar({
         if (pageNumber) {
             const inputPageNumber: number = Number(pageNumber);
             const matchingSearchType: string | undefined = Object.values(UnsplashSearchTypes).find(
-                (value: string) => value.toLowerCase === searchType.toLowerCase,
+                (value: string) => value.toLowerCase() === searchType.toLowerCase(),
             );
 
             if (matchingSearchType) {
@@ -141,11 +143,6 @@ export default function SearchBar({
                             variant='solid'
                             disallowEmptySelection={true}
                             selectionMode='single'
-                            disabledKeys={[
-                                UnsplashSearchTypes.LIST.valueOf(),
-                                UnsplashSearchTypes.TOPIC.valueOf(),
-                                UnsplashSearchTypes.RANDOM.valueOf(),
-                            ]}
                             selectedKeys={searchTypeSelection}
                             onSelectionChange={(keys: Selection) => {
                                 setSearchTypeSelection(keys);

@@ -37,13 +37,14 @@ export class UnsplashProvider {
                     searchParams.params.pageSize,
                 );
             }
-            case UnsplashSearchTypes.TOPIC: {
-                return this.fetchPhotosByTopic(
-                    searchParams.params.term,
-                    searchParams.params.pageNumber,
-                    searchParams.params.pageSize,
-                );
-            }
+            // Need new design flow to implement
+            // case UnsplashSearchTypes.TOPIC: {
+            //     return this.fetchPhotosByTopic(
+            //         searchParams.params.term,
+            //         searchParams.params.pageNumber,
+            //         searchParams.params.pageSize,
+            //     );
+            // }
             case UnsplashSearchTypes.USER: {
                 return this.fetchPhotosByUser(
                     searchParams.params.term,
@@ -51,9 +52,10 @@ export class UnsplashProvider {
                     searchParams.params.pageSize,
                 );
             }
-            case UnsplashSearchTypes.LIST: {
-                return this.fetchPhotos(searchParams.params.pageNumber, searchParams.params.pageSize);
-            }
+            // Need new design flow to implement
+            // case UnsplashSearchTypes.LIST: {
+            //     return this.fetchPhotos(searchParams.params.pageNumber, searchParams.params.pageSize);
+            // }
             case UnsplashSearchTypes.RANDOM: {
                 return this.fetchRandomPhotos(searchParams.params.pageNumber, searchParams.params.pageSize);
             }
@@ -136,6 +138,7 @@ export class UnsplashProvider {
         page?: number | null,
         perPage?: number | null,
     ): Promise<void | { results: Random[]; total: number }> {
+        console.warn('FETCH RANDOM PHOTOS: ', perPage);
         return await this.unsplash.photos
             .getRandom(
                 {
@@ -148,10 +151,12 @@ export class UnsplashProvider {
                 return response as ApiResponse<Random[]>;
             })
             .then((response: ApiResponse<Random[]>) => addBlurHashToUnsplashRandomImages(response))
-            .then((response: ApiResponse<Random[]>) => {
-                results: response.response ?? [];
-                total: response.response?.length ?? 0;
-            })
+            .then((response: ApiResponse<Random[]>) =>
+                Object.assign({
+                    results: response.response ?? [],
+                    total: response.response?.length ?? 0,
+                }),
+            )
             .catch((err) => {
                 console.error('Failed to fetch images by topic', err);
             });
