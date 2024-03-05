@@ -116,7 +116,7 @@ export class UnsplashProvider {
         page?: number | null,
         perPage?: number | null,
     ): Promise<void | { results: Basic[]; total: number }> {
-        if (!topic || topic.length === 0) return console.error('Provided topic is falsy or empty');
+        if (!topic || topic.length === 0) throw Error('Provided topic is falsy or empty');
 
         return await this.unsplash.topics
             .getPhotos(
@@ -188,7 +188,7 @@ export class UnsplashProvider {
         page?: number | null,
         perPage?: number | null,
     ): Promise<void | { results: Basic[]; total: number }> {
-        if (!keyword || keyword.length === 0) return console.error('Provided keyword is falsy or empty');
+        if (!keyword || keyword.length === 0) throw Error('Provided keyword is falsy or empty');
 
         return await this.unsplash.search
             .getPhotos(
