@@ -29,7 +29,6 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                     </div>
                 </div>
                 <img
-                    title='vertical'
                     alt={image.alt_description ?? 'description'}
                     src={image.urls.full}
                     className={`rounded-2xl h-auto w-auto shadow-md max-h-[60vh] xl:max-h-[80vh] xl:max-w-[80vw] max-w-[70vw]`}
@@ -61,7 +60,6 @@ export default async function UnsplashImage({ id }: { id: string }): Promise<Rea
                     />
                 </div>
                 <img
-                    title='landscape'
                     alt={image.alt_description ?? 'description'}
                     src={image.urls.full}
                     className={`rounded-2xl shadow-md w-full`}
