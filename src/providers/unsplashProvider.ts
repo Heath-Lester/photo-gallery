@@ -66,7 +66,7 @@ export class UnsplashProvider {
     }
 
     public static async fetchPhotoById(id: string): Promise<void | Full> {
-        if (!id || id.length === 0) return console.error(new Error('Provided id is falsy or empty'));
+        if (!id || id.length === 0) throw Error('Provided id is falsy or empty');
 
         return await this.unsplash.photos
             .get({ photoId: id }, this.fetchOptions)
@@ -78,7 +78,7 @@ export class UnsplashProvider {
     }
 
     public static async fetchPhotoByIdWithoutBlur(id: string): Promise<void | Full> {
-        if (!id || id.length === 0) return console.error(new Error('Provided id is falsy or empty'));
+        if (!id || id.length === 0) throw Error('Provided id is falsy or empty');
 
         return await this.unsplash.photos
             .get({ photoId: id }, this.fetchOptions)
@@ -93,7 +93,7 @@ export class UnsplashProvider {
         page?: number | null,
         perPage?: number | null,
     ): Promise<void | { results: Basic[]; total: number }> {
-        if (!name || name.length === 0) return console.error(new Error('Provided topic is falsy or empty'));
+        if (!name || name.length === 0) throw Error('Provided topic is falsy or empty');
 
         return await this.unsplash.users
             .getPhotos(
@@ -138,7 +138,6 @@ export class UnsplashProvider {
         page?: number | null,
         perPage?: number | null,
     ): Promise<void | { results: Random[]; total: number }> {
-        console.warn('FETCH RANDOM PHOTOS: ', perPage);
         return await this.unsplash.photos
             .getRandom(
                 {

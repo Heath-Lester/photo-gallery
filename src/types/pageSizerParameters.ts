@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { Selection } from '@nextui-org/react';
 
 /**
- * Parameters pase state handling to the page sizer
+ * Parameters to pass state handling to the page sizer
  */
 export type PageSizerParams = {
     /**
